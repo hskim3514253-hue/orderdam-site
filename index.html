@@ -32,7 +32,7 @@
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero__copy">
-        <h1 id="hero-title" class="display"><span>우리 가게 얼굴을 한</span> <span>테이블 카드 한 장이면</span> <span>주문도 결제도 끝.</span></h1>
+        <h1 id="hero-title" class="display"><span>우리 가게 얼굴을 한</span> <span>테이블&nbsp;카드 한&nbsp;장이면</span> <span>주문도 결제도&nbsp;끝.</span></h1>
         <p class="lead">손님은 카드의 QR을 찍거나 가운데 NFC에 휴대폰을 대면 메뉴가 열려요. 앱 설치 없이 자기 휴대폰으로 결제하고, 사장님 화면에는 결제가 끝난 주문만 들어옵니다.</p>
         <div class="actions">
           <a class="btn btn--ink" href="tel:01092845963">시범 매장 신청 · 010-9284-5963</a>
@@ -41,7 +41,8 @@
         <p class="hero__note">테이블 카드는 가게 이름·색·분위기에 맞춰 1:1로 만들어 드려요.</p>
       </div>
 
-      <div class="stage" aria-label="가게별 테이블 카드 예시">
+      <div class="stage" role="group" aria-label="가게별 테이블 카드 예시">
+        <p class="sr-only" aria-live="polite" id="shopLive"></p>
         <div class="cardbox cardbox--main"><div class="card" id="mainCard" data-shop="sea"></div></div>
         <div class="minis">
           <p class="minis__label">다른 가게 예시 <span>누르면 바뀌어요</span></p>
@@ -138,18 +139,18 @@
         <p class="aside aside--lead">오더담은 소프트웨어 개발 회사예요. 필요한 걸 직접 만들고 직접 운영합니다.</p>
         <div class="works">
           <article class="work work--order">
-            <p class="state state--red">시범 운영 준비 중</p>
             <h3>오더담 테이블 주문</h3>
+            <p class="state state--now">시범 운영 준비 중</p>
             <p>가게마다 그린 테이블 카드 한 장으로 여는 QR·NFC 주문·결제. 손님 화면과 사장님 화면이 함께 생겨요.</p>
           </article>
           <article class="work work--sono">
-            <p class="state">운영 중</p>
             <h3>SONO</h3>
+            <p class="state">운영 중</p>
             <p>웹소설 작가를 위한 설정 노트. 등장인물·장소·아이템·세계관을 정리하고, 전체와 화별 인물 관계도를 그려요.</p>
           </article>
           <article class="work work--paws">
-            <p class="state">웹 운영 중 · 앱 준비 중</p>
             <h3>포우즈 <small>Paws</small></h3>
+            <p class="state">웹 운영 중 · 앱 준비 중</p>
             <p>반려동물과 함께 갈 수 있는 카페·식당·숙소 찾기. 우리 아이 조건으로 들어갈 수 있는 곳을 비교해요.</p>
             <a href="https://paws-neighborhood-life.hskim3514253.chatgpt.site" target="_blank" rel="noopener">포우즈 둘러보기</a>
           </article>

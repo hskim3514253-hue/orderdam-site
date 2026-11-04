@@ -30,12 +30,21 @@
         const x = r() * W, y = r() * 50, s = r() * 0.55 + 0.15;
         stars += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${s.toFixed(2)}" fill="#fff" opacity="${(r() * 0.6 + 0.3).toFixed(2)}"/>`;
       }
-      // 달빛이 물에 비친 길
+      // 달빛이 물에 비친 길: 물결마다 부서지는 불규칙한 반짝임, 앞으로 올수록 넓고 잘게 흩어진다
       let glint = '';
-      for (let i = 0; i < 26; i++) {
-        const y = 58 + i * 1.6 + r() * 0.8, w = 2 + i * 0.55 + r() * 3;
-        glint += `<rect x="${(132 - w / 2 + (r() - 0.5) * (2 + i * 0.4)).toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${(0.35 + r() * 0.35).toFixed(2)}" rx=".2" fill="#ffe9a8" opacity="${(0.85 - i * 0.026).toFixed(2)}"/>`;
+      for (let i = 0; i < 34; i++) {
+        const y = 58.6 + i * 1.25 + r() * 0.6;
+        const spread = 2 + i * 0.95;
+        const pieces = 1 + Math.floor(r() * (1.5 + i * 0.12));
+        for (let k = 0; k < pieces; k++) {
+          if (r() < 0.18) continue;
+          const w = 0.6 + r() * (1.2 + i * 0.22);
+          const x = 132 + (r() - 0.5) * spread * 2 - w / 2;
+          const o = Math.max(0.12, (0.95 - i * 0.022) * (0.55 + r() * 0.45));
+          glint += `<rect x="${x.toFixed(2)}" y="${y.toFixed(2)}" width="${w.toFixed(2)}" height="${(0.25 + r() * 0.3).toFixed(2)}" rx=".15" fill="#ffeab0" opacity="${o.toFixed(2)}"/>`;
+        }
       }
+      glint = `<g filter="url(#${id}b)">${glint}</g>`;
       const layers = [
         [60, 0.5, 22, 0.3, '#1a3768'], [64, 0.9, 30, 1.1, '#16305d'], [69, 1.4, 38, 2.0, '#122852'],
         [75, 2.0, 46, 0.7, '#0f2247'], [82, 2.7, 56, 2.6, '#0b1b3b'], [90, 3.3, 66, 1.4, '#08152f'],
@@ -46,6 +55,7 @@
         <defs>
           <linearGradient id="${id}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#060d22"/><stop offset=".55" stop-color="#14295a"/><stop offset="1" stop-color="#2a4a86"/></linearGradient>
           <radialGradient id="${id}g"><stop offset="0" stop-color="#fff3c4" stop-opacity=".55"/><stop offset=".35" stop-color="#ffe7a0" stop-opacity=".18"/><stop offset="1" stop-color="#ffe7a0" stop-opacity="0"/></radialGradient>
+          <filter id="${id}b" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation=".18"/></filter>
           <radialGradient id="${id}m" cx=".42" cy=".4"><stop offset="0" stop-color="#fffaf0"/><stop offset=".7" stop-color="#f6e6b0"/><stop offset="1" stop-color="#e8cf86"/></radialGradient>
         </defs>
         <rect width="${W}" height="61" fill="url(#${id}s)"/>
@@ -151,6 +161,7 @@
     const next = b.dataset.shop, prev = main.dataset.shop;
     b.dataset.shop = prev; render(b.querySelector('.card'), prev, 23); label(b);
     main.dataset.shop = next; render(main, next, 9);
+    const live = document.getElementById('shopLive'); if (live) live.textContent = SHOPS[next].ko + ' 카드를 보고 있어요';
     main.classList.remove('is-swapping'); void main.offsetWidth; main.classList.add('is-swapping');
   }));
 
