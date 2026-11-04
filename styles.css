@@ -29,6 +29,7 @@ body {
   word-break: keep-all; overflow-wrap: break-word; -webkit-font-smoothing: antialiased;
   background: var(--ground);
 }
+main { overflow-x: clip; }
 h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
