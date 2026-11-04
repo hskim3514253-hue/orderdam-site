@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: orderdam-site
+    runtime: static
+    staticPublishPath: .
