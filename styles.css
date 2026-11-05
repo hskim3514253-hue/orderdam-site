@@ -124,7 +124,10 @@ button.cardbox { padding: 0; border: 0; background: none; cursor: pointer; font:
 .card .nfc::before, .card .nfc::after { content: ""; position: absolute; border-radius: 50%; border: .1em solid rgb(255 255 255 / .45); inset: -12%; }
 .card .nfc::after { inset: -25%; border-color: rgb(255 255 255 / .22); }
 .card .nfc svg { width: 40%; height: 40%; }
-.card .lbl { font-weight: 800; font-size: 1.05em; line-height: 1.3; color: #fff; text-shadow: 0 .08em .3em rgb(0 0 0 / .45); }
+.card .lbl { font-weight: 800; font-size: 1.05em; line-height: 1.3; color: #fff; background: rgb(8 12 24 / .62); padding: .25em .7em; border-radius: 1em; }
+/* 작은 카드와 겹친 카드에서는 읽히지 않는 잔글씨를 뺀다 */
+.cardbox--mini .card .lbl, .cardbox--mini .card .name small, .cardbox--mini .card .tbl,
+.fan .card .lbl, .fan .card .name small, .fan .card .tbl { display: none; }
 .card .brand { align-self: stretch; align-items: flex-end; text-align: right; justify-content: space-between; padding: 1.6em .4em 1.5em; color: var(--brand, #fff); }
 .card .name { font-size: 2.5em; line-height: 1.05; text-shadow: 0 .06em .4em rgb(0 0 0 / .35); }
 .card .name small { display: block; font-size: .36em; letter-spacing: .26em; margin-top: .6em; font-family: var(--sans); font-weight: 700; }
@@ -137,7 +140,7 @@ button.cardbox { padding: 0; border: 0; background: none; cursor: pointer; font:
 .shop-slow .name { font-family: "Gowun Batang", serif; font-weight: 700; }
 .shop-sobok { --qr-ink: #24412f; --brand: #2c4a36; }
 .shop-sobok .name { font-family: var(--sans); font-weight: 900; letter-spacing: -0.03em; text-shadow: none; }
-.shop-sobok .lbl { color: #2c4a36; text-shadow: 0 0 .3em rgb(255 255 255 / .8); }
+.shop-sobok .lbl { color: #2c4a36; background: rgb(255 255 255 / .8); }
 .shop-sobok .nfc { color: #2c4a36; background: rgb(255 255 255 / .45); border-color: rgb(44 74 54 / .5); }
 .shop-sobok .nfc::before { border-color: rgb(44 74 54 / .35); }
 .shop-sobok .nfc::after { border-color: rgb(44 74 54 / .18); }
