@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>오더담 · 우리 가게 얼굴을 한 테이블 주문</title>
+  <title>오더담 · 카드 한 장으로 테이블 주문</title>
   <meta name="description" content="오더담은 QR·NFC 테이블 주문 시스템을 만드는 소프트웨어 회사입니다. 가게마다 1:1로 디자인한 테이블 카드 한 장으로 손님은 앱 설치 없이 주문·결제하고, 사장님은 결제된 주문만 받습니다.">
   <meta name="theme-color" content="#e4e6e3">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -32,7 +32,7 @@
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero__copy">
-        <h1 id="hero-title" class="display"><span>우리 가게 얼굴을 한</span> <span>테이블&nbsp;카드 한&nbsp;장이면</span> <span>주문도 결제도&nbsp;끝.</span></h1>
+        <h1 id="hero-title" class="display"><span>카드 한 장이면</span> <span>주문·결제 끝.</span></h1>
         <p class="lead">QR을 찍거나 휴대폰을 대면 메뉴가 열려요.<br>앱 없이 결제하고, 사장님은 결제된 주문만 받아요.</p>
         <div class="actions">
           <a class="btn btn--ink" href="tel:01092845963">시범 매장 신청 · 010-9284-5963</a>
@@ -42,13 +42,22 @@
 
       <div class="stage" role="group" aria-label="가게별 테이블 카드 예시">
         <p class="sr-only" aria-live="polite" id="shopLive"></p>
-        <div class="cardbox cardbox--main"><div class="card" id="mainCard" data-shop="sea"></div></div>
+        <div class="tabletop">
+          <svg class="tabletop__wood" viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true">
+            <filter id="woodGrain"><feTurbulence type="fractalNoise" baseFrequency="0.004 0.11" numOctaves="3" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 0.78  0 0 0 0 0.55  0 0 0 0 0.34  1.6 0 0 0 -0.55"/></filter>
+            <rect width="600" height="420" fill="#8a5a36"/>
+            <rect width="600" height="420" filter="url(#woodGrain)"/>
+            <path d="M0 140H600M0 280H600" stroke="#3b2414" stroke-opacity=".45" stroke-width="2"/>
+          </svg>
+          <div class="cup" aria-hidden="true"><i></i></div>
+          <div class="cardbox cardbox--main"><div class="card" id="mainCard" data-shop="sea"></div></div>
+        </div>
         <div class="minis">
           <p class="minis__label">다른 가게 예시 <span>누르면 바뀌어요</span></p>
           <button class="cardbox cardbox--mini" type="button" data-shop="slow"><span class="card"></span></button>
           <button class="cardbox cardbox--mini" type="button" data-shop="sobok"><span class="card"></span></button>
         </div>
-        <p class="stage__fine">예시 가게예요. 카드 속 QR은 찍히지 않아요.</p>
+        <p class="stage__fine">테이블에 붙인 모습 예시예요. 카드 속 QR은 찍히지 않아요.</p>
       </div>
     </section>
 

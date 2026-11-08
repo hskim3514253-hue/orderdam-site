@@ -41,10 +41,10 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 
 /* 글자 */
-.display { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 3.7vw, 3.9rem); line-height: 1.2; letter-spacing: -0.045em; }
+.display { font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 4.4vw, 4.4rem); line-height: 1.22; letter-spacing: -0.025em; }
 .display span { display: block; white-space: nowrap; }
 .display--md { font-size: clamp(2rem, 3.8vw, 3.4rem); }
-.h2 { font-family: var(--display); font-weight: 800; font-size: clamp(1.9rem, 3.3vw, 3rem); line-height: 1.28; letter-spacing: -0.04em; text-wrap: balance; }
+.h2 { font-family: var(--display); font-weight: 700; font-size: clamp(1.8rem, 3vw, 2.7rem); line-height: 1.32; letter-spacing: -0.02em; text-wrap: balance; }
 .h3 { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; }
 .lead { font-size: clamp(1.05rem, 1.25vw, 1.18rem); color: var(--ink-2); max-width: 34em; }
 .aside { color: var(--ink-3); font-size: 1rem; }
@@ -145,15 +145,27 @@ button.cardbox { padding: 0; border: 0; background: none; cursor: pointer; font:
 .shop-sobok .nfc::before { border-color: rgb(44 74 54 / .35); }
 .shop-sobok .nfc::after { border-color: rgb(44 74 54 / .18); }
 
-/* 테이블 위에 기울여 놓인 큰 카드 */
-.cardbox--main { position: relative; }
-.cardbox--main::before { content: ""; position: absolute; left: 8%; right: 6%; bottom: -6%; height: 22%; border-radius: 50%; background: radial-gradient(closest-side, rgb(20 24 22 / .38), rgb(20 24 22 / 0)); filter: blur(6px); transform: rotate(-3deg); }
-.cardbox--main .card { transform: perspective(1400px) rotateX(16deg) rotateY(-12deg) rotateZ(-3deg); transform-origin: 50% 60%; }
-.cardbox--main .card.is-swapping { animation: settle 620ms var(--ease-out); }
-@keyframes settle {
-  0% { transform: perspective(1400px) rotateX(16deg) rotateY(-12deg) rotateZ(-3deg) translateY(-4%) scale(.96); opacity: .4; filter: blur(3px); }
-  100% { transform: perspective(1400px) rotateX(16deg) rotateY(-12deg) rotateZ(-3deg); opacity: 1; filter: blur(0); }
+/* 나무 테이블 위에 붙여 둔 큰 카드 */
+.tabletop {
+  position: relative; aspect-ratio: 1.42; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 1px 0 rgb(255 255 255 / .25) inset, 0 24px 40px -18px rgb(30 20 12 / .55);
 }
+.tabletop__wood { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.tabletop::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 30% 20%, rgb(255 240 215 / .22), transparent 55%), linear-gradient(transparent 60%, rgb(30 18 8 / .28)); }
+.cardbox--main { position: absolute; left: 7%; top: 24%; width: 72%; }
+.cardbox--main .card {
+  transform: rotate(-4deg);
+  box-shadow: 0 .08em 0 rgb(255 255 255 / .25) inset, 0 .15em .2em rgb(20 10 4 / .45), 0 .7em 1.2em -.2em rgb(20 10 4 / .45);
+}
+.cardbox--main .card.is-swapping { animation: settle 520ms var(--ease-out); }
+@keyframes settle {
+  0% { transform: rotate(-4deg) translateY(-6%) scale(1.03); opacity: .4; }
+  100% { transform: rotate(-4deg); opacity: 1; }
+}
+/* 위에서 내려다본 커피잔 */
+.cup { position: absolute; right: -5%; top: -9%; width: 34%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #f4f1ea 0 58%, #e2ddd2 60% 66%, #f7f5f0 68%); box-shadow: 0 10px 18px -6px rgb(20 10 4 / .55); }
+.cup i { position: absolute; inset: 27%; border-radius: 50%; background: radial-gradient(circle at 40% 38%, #8a5532, #4a2614 70%); box-shadow: 0 0 0 5px #fbfaf7, 0 2px 4px 5px rgb(0 0 0 / .12); }
+.cup::after { content: ""; position: absolute; left: 8%; bottom: 20%; width: 16%; height: 9%; border-radius: 99px; background: #f4f1ea; transform: rotate(40deg); box-shadow: 0 2px 3px rgb(0 0 0 / .2); }
 .cardbox--mini .card { transition: translate 220ms var(--ease-out), box-shadow 220ms var(--ease-out); }
 .cardbox--mini:nth-of-type(1) .card { rotate: 2.5deg; }
 .cardbox--mini:nth-of-type(2) .card { rotate: -2deg; }
@@ -239,7 +251,6 @@ button.cardbox { padding: 0; border: 0; background: none; cursor: pointer; font:
   .minis { grid-template-columns: 1fr 1fr; padding: 0; }
   .minis__label { grid-column: 1 / -1; }
   .stage__fine { text-align: left; padding: 0; }
-  .display span { display: inline; white-space: normal; }
 }
 @media (max-width: 420px) {
   .logo span { display: none; }
