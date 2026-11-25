@@ -150,22 +150,131 @@
       </div>`;
   }
 
-  const drawn = document.querySelectorAll('.card[data-shop]');
-  drawn.forEach((el, i) => render(el, el.dataset.shop, 7 + i * 4));
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const smoothstep = (a, b, v) => { const x = clamp((v - a) / (b - a)); return x * x * (3 - 2 * x); };
+  const lerp = (a, b, t) => a + (b - a) * t;
 
-  const main = document.getElementById('mainCard');
-  const minis = [...document.querySelectorAll('.cardbox--mini')];
-  minis.forEach((b, i) => { render(b.querySelector('.card'), b.dataset.shop, 21 + i * 3); label(b); });
-  function label(b) { b.setAttribute('aria-label', SHOPS[b.dataset.shop].ko + ' 카드를 크게 보기'); }
-  minis.forEach((b) => b.addEventListener('click', () => {
-    const next = b.dataset.shop, prev = main.dataset.shop;
-    b.dataset.shop = prev; render(b.querySelector('.card'), prev, 23); label(b);
-    main.dataset.shop = next; render(main, next, 9);
-    const live = document.getElementById('shopLive'); if (live) live.textContent = SHOPS[next].ko + ' 카드를 보고 있어요';
-    main.classList.remove('is-swapping'); void main.offsetWidth; main.classList.add('is-swapping');
+  // 모든 카드 그리기
+  $$('.card[data-shop]').forEach((el, i) => render(el, el.dataset.shop, 7 + i * 4));
+
+  // ── 첫 화면: 가게 바꾸기
+  const hero = $('.hero');
+  const heroCard = $('#heroCard');
+  const live = $('#shopLive');
+  hero.dataset.shop = heroCard.dataset.shop;
+  $$('.chip').forEach((chip) => chip.addEventListener('click', () => {
+    const key = chip.dataset.shop;
+    if (key === heroCard.dataset.shop) return;
+    $$('.chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+    heroCard.dataset.shop = key; hero.dataset.shop = key;
+    render(heroCard, key, 9);
+    if (live) live.textContent = SHOPS[key].ko + ' 카드를 보고 있어요';
+    if (!reduce.matches) { heroCard.classList.remove('is-swapping'); void heroCard.offsetWidth; heroCard.classList.add('is-swapping'); }
   }));
 
-  const top = document.querySelector('.top');
-  const onScroll = () => top && top.classList.toggle('is-scrolled', scrollY > 8);
-  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  // ── 첫 화면: 카드가 커서를 따라 기울어짐
+  const tilt = $('#tilt');
+  if (!reduce.matches) {
+    tilt.classList.add('is-entering');
+    heroCard.addEventListener('animationend', (e) => { if (e.animationName === 'land') tilt.classList.remove('is-entering'); });
+  }
+  if (finePointer.matches && !reduce.matches) {
+    let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+    const loop = () => {
+      x = lerp(x, tx, 0.12); y = lerp(y, ty, 0.12);
+      tilt.style.setProperty('--rx', x.toFixed(4)); tilt.style.setProperty('--ry', y.toFixed(4));
+      raf = (Math.abs(tx - x) > 0.0005 || Math.abs(ty - y) > 0.0005) ? requestAnimationFrame(loop) : 0;
+    };
+    hero.addEventListener('pointermove', (e) => {
+      const r = tilt.getBoundingClientRect();
+      tx = clamp((e.clientX - (r.left + r.width / 2)) / innerWidth, -0.5, 0.5);
+      ty = clamp((e.clientY - (r.top + r.height / 2)) / innerHeight, -0.5, 0.5);
+      if (!raf) raf = requestAnimationFrame(loop);
+    }, { passive: true });
+    hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(loop); });
+  }
+
+  // ── 등장: 끝나면 transform을 풀고, 애니메이션이 안 돌면 바로 보이게
+  const appearEls = $$('.appear');
+  appearEls.forEach((el) => el.addEventListener('animationend', (e) => { if (e.target === el) el.classList.add('is-in'); }));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const running = appearEls.some((el) => (el.getAnimations ? el.getAnimations() : []).some((a) => a.playState === 'running' || a.playState === 'finished'));
+    if (!running) appearEls.forEach((el) => el.classList.add('is-in'));
+  }));
+
+  // ── 스크롤 등장
+  const reveals = $$('.reveal');
+  reveals.forEach((el) => {
+    const sibs = [...el.parentElement.children].filter((c) => c.classList.contains('reveal'));
+    el.style.setProperty('--rd', `${Math.min(sibs.indexOf(el), 5) * 0.08}s`);
+  });
+  if ('IntersectionObserver' in window && !reduce.matches) {
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }
+    }), { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    reveals.forEach((el) => io.observe(el));
+  } else reveals.forEach((el) => el.classList.add('is-visible'));
+
+  // ── 상단 메뉴
+  const nav = $('#nav');
+  const onNav = () => nav.classList.toggle('is-scrolled', scrollY > 40);
+
+  // ── 시그니처: 한 번의 주문 (스크롤로 진행)
+  const story = $('.story');
+  const stage = $('#story');
+  const steps = $$('.steps span', stage);
+  const set = (k, v) => stage.style.setProperty(k, v);
+  let target = 0, smooth = 0, init = false, pending = false;
+
+  function frame() {
+    pending = false;
+    const range = Math.max(1, story.offsetHeight - innerHeight);
+    target = clamp(-story.getBoundingClientRect().top / range);
+    smooth = (!init || reduce.matches) ? target : lerp(smooth, target, 0.14);
+    init = true;
+    if (Math.abs(smooth - target) < 0.0004) smooth = target;
+    const t = smooth;
+
+    const phoneIn = smoothstep(0.02, 0.18, t);
+    const ripple = smoothstep(0.16, 0.32, t);
+    const pay = smoothstep(0.36, 0.44, t);
+    const paid = smoothstep(0.5, 0.58, t);
+    const phoneOut = smoothstep(0.64, 0.74, t);
+    const tabIn = smoothstep(0.66, 0.8, t);
+
+    set('--p', t.toFixed(4));
+    set('--phone-y', `${((1 - phoneIn) * -560 - phoneOut * 620).toFixed(1)}px`);
+    set('--phone-x', `${(phoneOut * -140).toFixed(1)}px`);
+    set('--phone-r', `${(6 + (1 - phoneIn) * 10 - phoneOut * 12).toFixed(2)}deg`);
+    set('--phone-o', (phoneIn * (1 - phoneOut)).toFixed(4));
+    set('--ripple', ripple.toFixed(4));
+    set('--pay', pay.toFixed(4));
+    set('--paid', paid.toFixed(4));
+    set('--tab-x', `${((1 - tabIn) * 320).toFixed(1)}px`);
+    set('--tab-o', tabIn.toFixed(4));
+    set('--card-dim', (tabIn * 0.6).toFixed(4));
+    set('--c0', (1 - smoothstep(0.3, 0.36, t)).toFixed(4));
+    set('--c1', (smoothstep(0.34, 0.4, t) * (1 - smoothstep(0.62, 0.68, t))).toFixed(4));
+    set('--c2', smoothstep(0.66, 0.72, t).toFixed(4));
+    const step = t > 0.94 ? 2 : t > 0.88 ? 1 : t > 0.82 ? 0 : -1;
+    steps.forEach((s, i) => s.classList.toggle('is-on', i <= step));
+
+    onNav();
+    if (Math.abs(smooth - target) > 0.0004) tick();
+  }
+  function tick() { if (!pending) { pending = true; requestAnimationFrame(frame); } }
+  addEventListener('scroll', tick, { passive: true });
+  addEventListener('resize', tick);
+  tick();
+
+  // 컨테이너 단위를 못 쓰는 브라우저용 보드 크기
+  if (!(window.CSS && CSS.supports('width', '1cqw'))) {
+    const wrap = $('.board-wrap'), board = $('.board');
+    const fit = () => board.style.setProperty('--k', (wrap.clientWidth / 720).toFixed(4));
+    addEventListener('resize', fit); fit();
+  }
 })();
