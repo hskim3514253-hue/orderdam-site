@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>오더담 · 카드 한 장으로 테이블 주문</title>
-  <meta name="description" content="오더담은 QR·NFC 테이블 주문 시스템을 만드는 소프트웨어 회사입니다. 가게마다 1:1로 디자인한 테이블 카드 한 장으로 손님은 앱 설치 없이 주문·결제하고, 사장님은 결제된 주문만 받습니다.">
+  <title>오더담 · QR·NFC 주문, 웹사이트 제작, 웹·앱 개발</title>
+  <meta name="description" content="오더담은 QR·NFC 테이블 주문, 웹사이트 제작, 웹·앱 개발을 하는 소프트웨어 회사입니다. 가게마다 1:1로 디자인한 테이블 카드 한 장으로 손님은 앱 설치 없이 주문·결제하고, 사장님은 결제된 주문만 받습니다.">
   <meta name="theme-color" content="#0b0a09">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,12 +23,13 @@
       <span>오더담</span>
     </a>
     <nav class="nav__links appear appear--soft" style="--d:.16s" aria-label="주요 메뉴">
+      <a href="#services">하는 일</a>
       <a href="#flow">주문 흐름</a>
       <a href="#cards">테이블 카드</a>
-      <a href="#owner">사장님 화면</a>
+      <a href="#works">만든 것들</a>
       <a href="#now">지금</a>
     </nav>
-    <a class="pill pill--solid pill--sm appear appear--side" style="--d:.28s" href="tel:01092845963">시범 매장 신청</a>
+    <a class="pill pill--solid pill--sm appear appear--side" style="--d:.28s" href="#contact">상담 신청</a>
   </header>
 
   <main id="main">
@@ -66,6 +67,34 @@
       </div>
 
       <p class="hero__fine appear appear--fade" style="--d:1.3s">예시로 지어낸 가게예요 · 카드 속 QR은 찍히지 않아요</p>
+    </section>
+
+    <!-- 하는 일 -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <p class="label reveal">하는 일</p>
+        <h2 id="services-title" class="h2 reveal">주문 시스템부터 홈페이지, 앱까지<br><em>직접</em> 만들고 운영합니다.</h2>
+        <ol class="svc-list">
+          <li class="svc reveal">
+            <span class="svc__idx">01</span>
+            <h3>QR·NFC 테이블 주문</h3>
+            <p>가게마다 그린 테이블 카드 한 장으로 손님은 앱 없이 주문·결제하고, 사장님은 결제된 주문만 받아요.</p>
+            <a class="svc__link" href="#flow">작동 방식 보기 <span aria-hidden="true">↓</span></a>
+          </li>
+          <li class="svc reveal">
+            <span class="svc__idx">02</span>
+            <h3>웹사이트 제작</h3>
+            <p>가게와 회사의 홈페이지를 만들어요. 휴대폰에서 먼저 보기 좋게, 우리 브랜드답게 만듭니다. 지금 보시는 이 사이트도 오더담이 만들었어요.</p>
+            <a class="svc__link" href="#contact">제작 상담하기 <span aria-hidden="true">→</span></a>
+          </li>
+          <li class="svc reveal">
+            <span class="svc__idx">03</span>
+            <h3>웹·앱 개발</h3>
+            <p>아이디어를 웹 서비스와 앱으로 만들어요. 웹소설 설정 노트 SONO, 반려동물 동반 장소 찾기 포우즈를 직접 만들어 운영하고 있어요.</p>
+            <a class="svc__link" href="#works">만든 것들 보기 <span aria-hidden="true">↓</span></a>
+          </li>
+        </ol>
+      </div>
     </section>
 
     <!-- 시그니처: 한 번의 주문 -->
@@ -194,9 +223,9 @@
         </ol>
       </div>
 
-      <div class="wrap works" aria-labelledby="works-title">
+      <div class="wrap works" id="works" aria-labelledby="works-title">
         <p class="label reveal">만든 것들</p>
-        <h2 id="works-title" class="h2 h2--sm reveal">주문 다음에도, 이것저것 만듭니다.</h2>
+        <h2 id="works-title" class="h2 h2--sm reveal">직접 만들어 운영하는 것들</h2>
         <ul class="work-list">
           <li class="reveal"><span class="work__idx">01</span><h3>오더담 테이블 주문</h3><p>테이블 카드 한 장으로 여는 QR·NFC 주문과 결제.</p><span class="tag tag--now">시범 운영 준비 중</span></li>
           <li class="reveal"><span class="work__idx">02</span><h3>SONO</h3><p>웹소설 작가를 위한 설정 노트와 인물 관계도.</p><span class="tag">운영 중</span></li>
@@ -208,10 +237,10 @@
     <!-- 연락 -->
     <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap">
-        <p class="label reveal">시범 매장 모집</p>
-        <h2 id="contact-title" class="contact__title reveal">우리 가게 카드,<br><em>먼저</em> 그려 볼까요?</h2>
+        <p class="label reveal">상담 신청</p>
+        <h2 id="contact-title" class="contact__title reveal">만들고 싶은 게 있다면,<br><em>먼저</em> 이야기해요.</h2>
         <div class="contact__row">
-          <p class="body body--muted reveal">가게 이름과 분위기, 테이블 수, 지금 쓰는 결제 방식만 알려 주세요. 대표가 직접 전화를 받습니다.</p>
+          <p class="body body--muted reveal">테이블 주문 시범 매장, 홈페이지 제작, 웹·앱 개발 무엇이든 괜찮아요. 하고 싶은 일만 알려 주시면 대표가 직접 전화를 받습니다.</p>
           <div class="reveal">
             <a class="bignum" href="tel:01092845963">010-9284-5963</a>
             <div class="contact__actions">

@@ -221,7 +221,13 @@
 
   // ── 상단 메뉴
   const nav = $('#nav');
-  const onNav = () => nav.classList.toggle('is-scrolled', scrollY > 40);
+  const lightZones = $$('.sheet--paper');
+  const onNav = () => {
+    nav.classList.toggle('is-scrolled', scrollY > 40);
+    // 메뉴 바로 뒤가 밝은 종이 구역이면 밝은 유리로 바꿔 글자 대비를 지킨다
+    const r = nav.getBoundingClientRect(), y = r.top + r.height / 2;
+    nav.classList.toggle('is-light', lightZones.some((z) => { const b = z.getBoundingClientRect(); return b.top <= y && b.bottom >= y; }));
+  };
 
   // ── 시그니처: 한 번의 주문 (스크롤로 진행)
   const story = $('.story');
