@@ -66,7 +66,7 @@ img { display: block; max-width: 100%; }
 
 /* 오른쪽 위 고정 소개 */
 #fix { position: fixed; z-index: 40; top: 5rem; right: calc(var(--c) + var(--g) * 3); width: calc(var(--c) * 2); transition: opacity .5s; }
-#fix p + p { margin-top: 1.3rem; }
+#fix .fix-s { display: none; }   /* 휴대폰용 짧은 소개 */
 #fix.is-hidden { opacity: 0; pointer-events: none; }
 
 /* ── 가운데 심벌 (오더담 로고의 카드 모양에서 따온 두 조각) ───────── */
@@ -226,6 +226,8 @@ body[data-page="about"] #stage, body[data-page="sono"] #stage { pointer-events: 
   #hd-time { grid-column: 1 / -1; grid-row: 2; }
   /* 오른쪽 위 소개 글 */
   #fix { top: 6.6rem; right: var(--g); width: var(--side); font-size: 1.2rem; }
+  #fix .fix-l { display: none; }
+  #fix .fix-s { display: block; }
   body[data-view="g"] #fix { opacity: 0; pointer-events: none; }
   #big { display: none !important; }
   /* 세로 보기: 왼쪽 목록, 오른쪽 가운데에 번호·분야·맡은 일 */
@@ -247,8 +249,6 @@ body[data-page="about"] #stage, body[data-page="sono"] #stage { pointer-events: 
   #about .ab-info dt { width: 9.5rem; }
   #modes, #cp { font-size: 1.3rem; }
 }
-/* 세로가 짧은 휴대폰에서는 소개 글이 가운데 정보와 닿으므로 숨긴다 */
-@media (max-width: 767px) and (max-height: 720px) { #fix { display: none; } }
 
 /* ── 스튜디오 소개 ─────────────────────────── */
 #about { position: fixed; inset: 0; z-index: 20; overflow-y: auto; overflow-x: hidden; visibility: hidden; opacity: 0; transition: opacity .5s, visibility 0s .5s; overscroll-behavior: contain; }
