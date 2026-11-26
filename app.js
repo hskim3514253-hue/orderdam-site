@@ -233,6 +233,17 @@
     lazy.forEach((v) => lio.observe(v));
   }
 
+  // ── 사이드바: 지금 보고 있는 구역의 메뉴를 표시
+  const navLinks = [...document.querySelectorAll('.nav__links a')];
+  const targets = navLinks.map((a) => document.querySelector(a.getAttribute('href')));
+  const markHere = () => {
+    const y = innerHeight * 0.4;
+    let cur = -1;
+    targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top <= y) cur = i; });
+    navLinks.forEach((a, i) => { a.classList.toggle('is-here', i === cur); if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  };
+  addEventListener('scroll', markHere, { passive: true }); markHere();
+
   // ── 시그니처: 한 번의 주문 (스크롤로 진행)
   const story = $('.story');
   const stage = $('#story');
