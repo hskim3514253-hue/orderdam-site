@@ -23,6 +23,65 @@
   function rand(seed) { let s = seed; return () => (s = (s * 9301 + 49297) % 233280) / 233280; }
 
   const SCENES = {
+    youth() {
+      // 청음 카페 유스레코드: 크림 종이 위에 LP 한 장과 톤암, 아래는 원목 선반.
+      // 가운데 NFC 자리가 레코드 라벨이 된다 (카드 격자 가운데 칸의 중심 x≈82)
+      const id = 'yr' + uid++, r = rand(13);
+      const cx = 82, cy = 47, R = 41;
+      let grooves = '';
+      for (let i = 0; i < 26; i++) {
+        const rr = 15 + i * 1.02 + r() * 0.3;
+        grooves += `<circle cx="${cx}" cy="${cy}" r="${rr.toFixed(2)}" fill="none" stroke="${i % 5 === 4 ? '#3a322b' : '#241e19'}" stroke-width="${(0.18 + r() * 0.12).toFixed(2)}" opacity="${(0.55 + r() * 0.4).toFixed(2)}"/>`;
+      }
+      let grain = '';
+      for (let i = 0; i < 9; i++) {
+        const y = 89 + i * 1.25 + r() * 0.5;
+        grain += `<path d="M0 ${y.toFixed(2)} C${(40 + r() * 20).toFixed(1)} ${(y + r() - .5).toFixed(2)} ${(100 + r() * 20).toFixed(1)} ${(y + r() - .5).toFixed(2)} ${W} ${(y + r() * .6).toFixed(2)}" fill="none" stroke="#3b2416" stroke-width=".22" opacity="${(0.25 + r() * 0.3).toFixed(2)}"/>`;
+      }
+      let specks = '';
+      for (let i = 0; i < 60; i++) specks += `<circle cx="${(r() * W).toFixed(1)}" cy="${(r() * 86).toFixed(1)}" r="${(r() * 0.28 + 0.08).toFixed(2)}" fill="#8a6a4a" opacity="${(r() * 0.25 + 0.08).toFixed(2)}"/>`;
+      return `<svg class="scene" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="${id}p" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf6ec"/><stop offset="1" stop-color="#efe3cf"/></linearGradient>
+          <radialGradient id="${id}l" cx=".86" cy=".12" r=".7"><stop offset="0" stop-color="#fff6dc" stop-opacity=".9"/><stop offset="1" stop-color="#fff6dc" stop-opacity="0"/></radialGradient>
+          <radialGradient id="${id}v" cx=".5" cy=".5" r=".5"><stop offset=".3" stop-color="#1d1915"/><stop offset=".97" stop-color="#110e0c"/><stop offset="1" stop-color="#2a241f"/></radialGradient>
+          <linearGradient id="${id}s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".46" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".16"/><stop offset=".54" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <linearGradient id="${id}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a38"/><stop offset=".12" stop-color="#6e4329"/><stop offset="1" stop-color="#4e2e1b"/></linearGradient>
+          <filter id="${id}d" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx=".6" dy="1.6" stdDeviation="1.6" flood-color="#3b2416" flood-opacity=".35"/></filter>
+        </defs>
+        <rect width="${W}" height="${H}" fill="url(#${id}p)"/>
+        <rect width="${W}" height="${H}" fill="url(#${id}l)"/>
+        ${specks}
+        <!-- 레코드 재킷: 레코드 뒤로 살짝 보이는 테라코타 재킷 -->
+        <g filter="url(#${id}d)">
+          <rect x="22" y="9" width="66" height="66" rx="1.2" fill="#b9573a"/>
+          <circle cx="34" cy="21" r="7" fill="#f3e6cf" opacity=".9"/>
+          <path d="M22 60 L88 44" stroke="#f3e6cf" stroke-width=".7" opacity=".55"/>
+          <path d="M22 64 L88 48" stroke="#f3e6cf" stroke-width=".35" opacity=".4"/>
+        </g>
+        <!-- LP -->
+        <g filter="url(#${id}d)">
+          <circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#${id}v)"/>
+          ${grooves}
+          <circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#${id}s)"/>
+          <circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#${id}s)" transform="rotate(90 ${cx} ${cy})" opacity=".6"/>
+          <circle cx="${cx}" cy="${cy}" r="${R - 0.3}" fill="none" stroke="#4a4038" stroke-width=".35"/>
+        </g>
+        <!-- 톤암 -->
+        <g>
+          <circle cx="146" cy="13" r="6" fill="#e9dcc6" stroke="#b9a68a" stroke-width=".5"/>
+          <circle cx="146" cy="13" r="2.6" fill="#a8916f"/>
+          <path d="M146 13 L131 44 L118 52" fill="none" stroke="#cbbba2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M146 13 L131 44 L118 52" fill="none" stroke="#f6eedf" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+          <rect x="113.6" y="50.2" width="6.5" height="3.4" rx=".6" fill="#3a2f27" transform="rotate(-32 116.8 51.9)"/>
+          <rect x="150" y="9" width="5" height="8" rx="1" fill="#5a4a3c"/>
+        </g>
+        <!-- 원목 선반 -->
+        <rect x="0" y="87" width="${W}" height="13" fill="url(#${id}w)"/>
+        <rect x="0" y="87" width="${W}" height=".7" fill="#b07c52" opacity=".9"/>
+        ${grain}
+      </svg>`;
+    },
     sea() {
       const id = 'sea' + uid++, r = rand(5);
       let stars = '';
@@ -119,6 +178,7 @@
   const SHOPS = {
     sea:   { cls: 'shop-sea',   ko: '밤바다', en: 'HIGHBALL BAR BAMBADA', table: 'SEAT 07' },
     slow:  { cls: 'shop-slow',  ko: '느린오후', en: 'SLOW AFTERNOON COFFEE', table: 'TABLE 03' },
+    youth: { cls: 'shop-youth', ko: '유스레코드', en: 'COFFEE & RECORDS', table: 'TABLE 04' },
     sobok: { cls: 'shop-sobok', ko: '소복', en: 'SOBOK BAKERY', table: 'TABLE 01' },
   };
   const PHONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg>';
@@ -243,6 +303,103 @@
     navLinks.forEach((a, i) => { a.classList.toggle('is-here', i === cur); if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
   };
   addEventListener('scroll', markHere, { passive: true }); markHere();
+
+  // ── 일하는 방식: 다섯 단계가 천천히 궤도를 돌고, 3.5초마다 다음 단계를 보여 준다.
+  //    누르거나 마우스를 올리면 멈추고, 그 단계를 보여 준다
+  const orbit = $('[data-orbit]');
+  if (orbit) {
+    const STEPS = JSON.parse(orbit.dataset.steps);
+    const nodesEl = $$('.orbit__node', orbit);
+    const detail = $('.process__detail');
+    let active = 0, spin = 0, paused = false, seen = false, last = performance.now(), since = 0;
+    const show = (i) => {
+      active = i;
+      nodesEl.forEach((n, k) => n.setAttribute('aria-pressed', String(k === i)));
+      $('[data-step-en]', detail).innerHTML = `${String(i + 1).padStart(2, '0')} <span lang="en">${STEPS[i][0]}</span>`;
+      $('[data-step-ko]', detail).textContent = STEPS[i][1];
+      $('[data-step-text]', detail).textContent = STEPS[i][2];
+      detail.classList.remove('is-swap'); void detail.offsetWidth; detail.classList.add('is-swap');
+    };
+    const place = () => {
+      const r = orbit.clientWidth * 0.41;
+      nodesEl.forEach((n, i) => {
+        const a = (i / nodesEl.length) * Math.PI * 2 - Math.PI / 2 + spin;
+        n.style.setProperty('--x', `${(Math.cos(a) * r).toFixed(1)}px`);
+        n.style.setProperty('--y', `${(Math.sin(a) * r).toFixed(1)}px`);
+      });
+    };
+    nodesEl.forEach((n, i) => n.addEventListener('click', () => { show(i); since = 0; }));
+    orbit.addEventListener('pointerenter', () => { paused = true; });
+    orbit.addEventListener('pointerleave', () => { paused = false; });
+    orbit.addEventListener('focusin', () => { paused = true; });
+    orbit.addEventListener('focusout', () => { paused = false; });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { seen = e.isIntersecting; if (seen) requestAnimationFrame(loopOrbit); }).observe(orbit);
+    function loopOrbit(now) {
+      const dt = Math.min(64, now - last); last = now;
+      if (!reduce.matches && !paused) {
+        spin += dt * 0.00006;
+        since += dt;
+        if (since > 3500) { since = 0; show((active + 1) % STEPS.length); }
+      }
+      place();
+      if (seen) requestAnimationFrame(loopOrbit);
+    }
+    addEventListener('resize', place);
+    place();
+  }
+
+  // ── 만든 것들: 이름 위에 마우스를 올리면 미리보기가 커서를 따라온다
+  const hp = $('.hp');
+  if (hp && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const items = $$('.hp__item', hp);
+    let hx = 0, hy = 0, tx = 0, ty = 0, on = false, raf = 0;
+    const move = () => {
+      hx = reduce.matches ? tx : lerp(hx, tx, 0.2); hy = reduce.matches ? ty : lerp(hy, ty, 0.2);
+      hp.style.setProperty('--hx', `${hx.toFixed(1)}px`); hp.style.setProperty('--hy', `${hy.toFixed(1)}px`);
+      raf = on || Math.abs(hx - tx) > .5 ? requestAnimationFrame(move) : 0;
+    };
+    const target = (e) => { tx = Math.min(e.clientX + 24, innerWidth - 316); ty = Math.min(e.clientY + 20, innerHeight - 226); };
+    $$('[data-hp-trigger]').forEach((t) => {
+      t.addEventListener('pointerenter', (e) => {
+        items.forEach((it) => it.classList.toggle('is-on', it.dataset.hp === t.dataset.hpTrigger));
+        target(e); if (!on) { hx = tx; hy = ty; }
+        on = true; hp.classList.add('is-on'); if (!raf) raf = requestAnimationFrame(move);
+      });
+      t.addEventListener('pointermove', target);
+      t.addEventListener('pointerleave', () => { on = false; hp.classList.remove('is-on'); });
+    });
+  }
+
+  // ── 상담 배경: 점으로 된 파도 (화면에 보일 때만 그린다)
+  $$('.contact__dots').forEach((cv) => {
+    const ctx = cv.getContext('2d');
+    let w = 0, h = 0, t = 0, vis = false, lastT = 0;
+    const COLS = 130, ROWS = 60;
+    const size = () => { const d = Math.min(2, devicePixelRatio || 1); w = cv.clientWidth; h = cv.clientHeight; cv.width = w * d; cv.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      const fov = h * 0.95, horizon = h * 0.24, cam = 2;
+      for (let r = ROWS - 1; r >= 0; r--) {
+        const z = 3 + r * 0.2;
+        const fade = Math.max(0, 1 - r / ROWS);
+        for (let c = 0; c < COLS; c++) {
+          const x = (c / (COLS - 1) - 0.5) * 8;
+          const y = Math.sin(x * 0.9 + t) * 0.32 + Math.sin(z * 0.7 - t * 0.8) * 0.3;
+          const sx = w * 0.55 + (x * fov) / z, sy = horizon + ((cam - y * 0.6) * fov) / z;
+          if (sx < -4 || sx > w + 4 || sy > h + 4) continue;
+          const rad = Math.max(0.8, 6 / z);
+          ctx.globalAlpha = Math.min(1, (0.3 + 0.7 * fade) * (0.7 + y * 0.5));
+          ctx.fillStyle = (r + c) % 23 === 0 ? '#c6f432' : '#f5f5f3';
+          ctx.fillRect(sx - rad / 2, sy - rad / 2, rad, rad);
+        }
+      }
+      ctx.globalAlpha = 1;
+    };
+    const loop = (now) => { if (!vis) return; const dt = Math.min(64, now - (lastT || now)); lastT = now; t += dt * 0.0008; draw(); requestAnimationFrame(loop); };
+    size(); draw();
+    addEventListener('resize', () => { size(); draw(); });
+    if ('IntersectionObserver' in window && !reduce.matches) new IntersectionObserver(([e]) => { vis = e.isIntersecting; if (vis) { lastT = 0; requestAnimationFrame(loop); } }).observe(cv);
+  });
 
   // ── 시그니처: 한 번의 주문 (스크롤로 진행)
   // 테이블 오더 페이지에만 있다. 없으면 메뉴 상태만 갱신한다

@@ -72,7 +72,7 @@
             <p>손님은 앱 없이 주문·결제하고, 사장님은 결제된 주문만 받아요.</p>
             <a class="svc__link" href="table-order.html">테이블 오더 보기 <span aria-hidden="true">→</span></a>
             <div class="svc__vis svc__vis--order" aria-hidden="true">
-              <div class="cardbox"><div class="card card--quiet" data-shop="sea"></div></div>
+              <div class="cardbox"><div class="card card--quiet" data-shop="youth"></div></div>
             </div>
           </li>
           <li class="svc reveal">
@@ -126,6 +126,31 @@
       </div>
     </section>
 
+    <!-- 일하는 방식: 다섯 단계가 궤도를 돈다 -->
+    <section class="process" id="process" aria-labelledby="process-title">
+      <div class="wrap process__grid">
+        <div class="process__copy">
+          <p class="label reveal"><span lang="en">How We Work</span> — 일하는 방식</p>
+          <h2 id="process-title" class="h2 reveal">한 팀이 처음부터<br><em>끝까지</em> 맡아요.</h2>
+          <div class="process__detail reveal" aria-live="polite">
+            <p class="process__step" data-step-en>01 <span lang="en">Plan</span></p>
+            <h3 data-step-ko>기획</h3>
+            <p data-step-text>무엇을 만들지, 누가 쓸지부터 같이 정해요. 화면 흐름과 일정을 한 장으로 정리해 드려요.</p>
+          </div>
+        </div>
+        <div class="orbit reveal" data-orbit data-steps='[["Plan","기획","무엇을 만들지, 누가 쓸지부터 같이 정해요. 화면 흐름과 일정을 한 장으로 정리해 드려요."],["Design","디자인","휴대폰 화면부터 그려요. 브랜드의 색과 글씨에 맞춘 시안을 보고 고를 수 있어요."],["Build","개발","주문과 결제처럼 틀리면 안 되는 부분은 서버에서 한 번 더 확인하도록 만들어요."],["Launch","배포","실제 주소에 올리고, 휴대폰과 컴퓨터에서 직접 확인한 뒤 공개해요."],["Run","운영","공개한 뒤에도 고치고 더해요. 문의는 대표가 직접 받아요."]]'>
+          <div class="orbit__ring" aria-hidden="true"></div>
+          <div class="orbit__ring orbit__ring--in" aria-hidden="true"></div>
+          <div class="orbit__core" aria-hidden="true"><span>Orderdam</span></div>
+          <button class="orbit__node" type="button" data-i="0" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/></svg><span>기획</span></button>
+          <button class="orbit__node" type="button" data-i="1" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg><span>디자인</span></button>
+          <button class="orbit__node" type="button" data-i="2" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><span>개발</span></button>
+          <button class="orbit__node" type="button" data-i="3" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 2 5 5 5 9l-2 3H9l-2-3c0-4 2-7 5-9z"/><path d="M10 18l-1 3M14 18l1 3"/><circle cx="12" cy="10" r="1.6"/></svg><span>배포</span></button>
+          <button class="orbit__node" type="button" data-i="4" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg><span>운영</span></button>
+        </div>
+      </div>
+    </section>
+
     <!-- 하는 일 띠 -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker__track">
@@ -140,16 +165,16 @@
         <p class="label reveal"><span lang="en">Selected Work</span> — 만든 것들</p>
         <h2 id="works-title" class="h2 h2--sm reveal">직접 만들어 운영하는 것들</h2>
         <ul class="work-list">
-          <li class="reveal"><span class="work__idx">01</span><h3><a href="table-order.html">오더담 테이블 오더</a></h3><p>테이블 카드 한 장으로 여는 QR·NFC 주문과 결제.</p></li>
-          <li class="reveal"><span class="work__idx">02</span><h3>SONO</h3><p>웹소설 작가를 위한 설정 노트와 인물 관계도.</p></li>
-          <li class="reveal"><span class="work__idx">03</span><h3>포우즈 <small>Paws</small></h3><p>반려동물과 함께 갈 수 있는 곳 찾기. <a href="https://paws-neighborhood-life.hskim3514253.chatgpt.site" target="_blank" rel="noopener">둘러보기 ↗</a></p></li>
+          <li class="reveal"><span class="work__idx">01</span><h3 data-hp-trigger="to"><a href="table-order.html">오더담 테이블 오더</a></h3><p>테이블 카드 한 장으로 여는 QR·NFC 주문과 결제.</p></li>
+          <li class="reveal"><span class="work__idx">02</span><h3 data-hp-trigger="sono">SONO</h3><p>웹소설 작가를 위한 설정 노트와 인물 관계도.</p></li>
+          <li class="reveal"><span class="work__idx">03</span><h3 data-hp-trigger="paws">포우즈 <small>Paws</small></h3><p>반려동물과 함께 갈 수 있는 곳 찾기. <a href="https://paws-neighborhood-life.hskim3514253.chatgpt.site" target="_blank" rel="noopener">둘러보기 ↗</a></p></li>
         </ul>
       </div>
     </section>
 
     <!-- 연락 -->
     <section class="contact" id="contact" aria-labelledby="contact-title">
-      <video class="contact__bg lazy-vid" muted loop playsinline preload="none" aria-hidden="true" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4"></video>
+      <canvas class="contact__bg contact__dots" aria-hidden="true"></canvas>
       <div class="wrap">
         <p class="label reveal"><span lang="en">Contact</span> — 상담 신청</p>
         <p class="contact__en reveal" lang="en">Let’s build <i>something good.</i></p>
@@ -183,6 +208,19 @@
     </div>
   </footer>
 
+
+  <!-- 만든 것들: 이름에 마우스를 올리면 뜨는 미리보기 (마우스가 있는 기기에서만) -->
+  <div class="hp" aria-hidden="true">
+    <div class="hp__item" data-hp="to"><div class="cardbox"><div class="card card--quiet" data-shop="youth"></div></div></div>
+    <div class="hp__item hp__item--app" data-hp="sono">
+      <div class="mini-phone"><div class="mini-phone__screen"><p>SONO</p><span class="row"><i></i><b></b></span><span class="row"><i></i><b></b></span><span class="row"><i></i><b></b></span><span class="row"><i></i><b></b></span></div></div>
+      <p class="hp__cap">설정 노트 · 인물 관계도</p>
+    </div>
+    <div class="hp__item hp__item--app" data-hp="paws">
+      <div class="mini-phone"><div class="mini-phone__screen mini-phone__screen--paws"><p>포우즈</p><span class="tile"></span><span class="tile"></span><span class="tile"></span></div></div>
+      <p class="hp__cap">반려동물과 함께 갈 수 있는 곳</p>
+    </div>
+  </div>
   <div class="grain" aria-hidden="true"></div>
   <script src="app.js" defer></script>
 </body>
