@@ -183,13 +183,55 @@
 
   // ── 상단 메뉴
   const nav = $('#nav');
-  const lightZones = $$('.sheet--paper');
+  const lightZones = $$('.sheet--paper, .hero');
   const onNav = () => {
     nav.classList.toggle('is-scrolled', scrollY > 40);
     // 메뉴 바로 뒤가 밝은 종이 구역이면 밝은 유리로 바꿔 글자 대비를 지킨다
     const r = nav.getBoundingClientRect(), y = r.top + r.height / 2;
     nav.classList.toggle('is-light', lightZones.some((z) => { const b = z.getBoundingClientRect(); return b.top <= y && b.bottom >= y; }));
   };
+
+  // ── 첫 화면: 영상 타일이 옆으로 흐르고, 스크롤 속도만큼 빨라진다. 큰 이름은 속도만큼 기운다
+  const reel = $('.reel__track');
+  const word = $('.wordmark span');
+  if (reel) {
+    const items = $$('.reel__item', reel);
+    items.forEach((it) => { const c = it.cloneNode(true); c.setAttribute('aria-hidden', 'true'); reel.appendChild(c); });
+    const vids = $$('video', reel);
+    const load = (v) => { if (!v.src && v.dataset.src) { v.src = v.dataset.src; } };
+    const play = (v) => { load(v); if (!reduce.matches) v.play().catch(() => {}); };
+    if ('IntersectionObserver' in window) {
+      const vio = new IntersectionObserver((es) => es.forEach((e) => { e.isIntersecting ? play(e.target) : e.target.pause(); }), { rootMargin: '0px 200px' });
+      vids.forEach((v) => vio.observe(v));
+    } else vids.forEach(play);
+
+    let x = 0, vel = 0, lastY = scrollY, lastT = performance.now(), skew = 0, visible = true;
+    const hero = $('.hero');
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) requestAnimationFrame(loop); }).observe(hero);
+    addEventListener('scroll', () => { vel += (scrollY - lastY); lastY = scrollY; }, { passive: true });
+    function loop(now) {
+      const dt = Math.min(64, now - lastT); lastT = now;
+      const half = reel.scrollWidth / 2;
+      const speed = reduce.matches ? 0 : 0.045 * dt + Math.abs(vel) * 0.35;
+      x = (x + speed) % half;
+      reel.style.transform = `translate3d(${-x.toFixed(2)}px,0,0)`;
+      skew = lerp(skew, reduce.matches ? 0 : clamp(vel * -0.12, -14, 14), 0.12);
+      if (word) word.style.setProperty('--skew', `${skew.toFixed(2)}deg`);
+      vel *= 0.86;
+      if (visible) requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  // ── 아래쪽 배경 영상: 화면에 가까워질 때만 불러오기
+  const lazy = [...document.querySelectorAll('.lazy-vid')];
+  if ('IntersectionObserver' in window) {
+    const lio = new IntersectionObserver((es) => es.forEach((e) => {
+      const v = e.target;
+      if (e.isIntersecting) { if (!v.src) v.src = v.dataset.src; if (!reduce.matches) v.play().catch(() => {}); } else v.pause();
+    }), { rootMargin: '300px 0px' });
+    lazy.forEach((v) => lio.observe(v));
+  }
 
   // ── 시그니처: 한 번의 주문 (스크롤로 진행)
   const story = $('.story');

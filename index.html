@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>오더담 · QR·NFC 주문, 웹사이트 제작, 웹·앱 개발</title>
   <meta name="description" content="오더담은 QR·NFC 테이블 주문, 웹사이트 제작, 웹·앱 개발을 하는 소프트웨어 회사입니다. 가게마다 1:1로 디자인한 테이블 카드 한 장으로 손님은 앱 설치 없이 주문·결제하고, 사장님은 결제된 주문만 받습니다.">
-  <meta name="theme-color" content="#0b0a09">
+  <meta name="theme-color" content="#0a0a0a">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Nanum+Myeongjo:wght@800&family=Gowun+Batang:wght@700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Nanum+Myeongjo:wght@800&family=Gowun+Batang:wght@700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
-  <link rel="preload" href="https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -35,83 +33,98 @@
   </header>
 
   <main id="main">
-    <!-- 첫 화면: 회사 소개 + 하는 일 세 가지 -->
+    <!-- 첫 화면: 흐르는 영상 타일 + 큰 이름 + 회사 소개 -->
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero__light" aria-hidden="true"></div>
-
-      <div class="hero__head">
-        <div>
-          <p class="eyebrow appear appear--soft" style="--d:.2s"><i class="dot"></i><span class="en" lang="en">Software Studio</span><span class="eyebrow__sep" aria-hidden="true"></span>소프트웨어 개발 및 공급</p>
-          <h1 id="hero-title" class="hero__title">
-            <span class="line appear appear--mask" style="--d:.34s">웹과 앱을 만들어</span>
-            <span class="line appear appear--mask" style="--d:.48s">공급합니다, <em>오더담.</em></span>
-          </h1>
-          <p class="hero__en appear appear--soft" style="--d:.6s" lang="en">We design, build <i>&amp;</i> ship software.</p>
-        </div>
-        <div class="hero__side">
-          <p class="hero__lede appear appear--soft" style="--d:.66s">가게의 주문 시스템부터 회사 홈페이지, 새 서비스의 웹과 앱까지. 필요한 것을 직접 만들고, 만든 뒤에도 함께 운영합니다.</p>
-          <div class="hero__actions">
-            <a class="pill pill--solid appear appear--btn" style="--d:.8s" href="#contact">상담 신청 <span class="pill__arrow" aria-hidden="true">→</span></a>
-            <a class="pill pill--ghost appear appear--side" style="--d:.92s" href="tel:01092845963">010-9284-5963</a>
-          </div>
+      <div class="reel appear appear--fade" style="--d:.1s" aria-hidden="true">
+        <div class="reel__track">
+          <figure class="reel__item" style="--h:74%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260505_101331_74f9b798-3f00-4e86-8a01-377aa16ffeaa.mp4"></video><figcaption><b>Websites</b><span>웹사이트 제작</span></figcaption></figure>
+          <figure class="reel__item" style="--h:96%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4"></video><figcaption><b>Web Apps</b><span>웹 서비스 개발</span></figcaption></figure>
+          <figure class="reel__item" style="--h:66%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"></video><figcaption><b>Automation</b><span>주문·결제 자동화</span></figcaption></figure>
+          <figure class="reel__item" style="--h:88%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260601_110537_3a579fa0-7bbc-4d94-9d25-0e816c7840f5.mp4"></video><figcaption><b>Mobile Apps</b><span>앱 개발</span></figcaption></figure>
+          <figure class="reel__item" style="--h:70%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_080021_d598092b-c4c2-4e53-8e46-94cf9064cd50.mp4"></video><figcaption><b>Table Ordering</b><span>QR·NFC 주문</span></figcaption></figure>
         </div>
       </div>
 
-      <ol class="svc-list" id="services" aria-label="오더담이 하는 일">
-        <li class="svc appear appear--soft" style="--d:1s">
-          <div class="svc__vis svc__vis--order" aria-hidden="true">
-            <div class="cardbox"><div class="card card--quiet" data-shop="sea"></div></div>
+      <div class="hero__base">
+        <p class="wordmark appear appear--mask" style="--d:.3s" aria-hidden="true"><span>ORDERDAM</span></p>
+        <div class="hero__side">
+          <p class="eyebrow appear appear--soft" style="--d:.5s"><i class="dot"></i><span lang="en">Software Studio ©2026</span></p>
+          <h1 id="hero-title" class="hero__title appear appear--soft" style="--d:.6s">웹과 앱을 만들어<br>공급합니다.</h1>
+          <p class="hero__lede appear appear--soft" style="--d:.7s">가게의 QR·NFC 주문 시스템부터 회사 홈페이지, 새 서비스의 웹과 앱까지. 오더담이 직접 만들고, 만든 뒤에도 함께 운영합니다.</p>
+          <div class="hero__actions">
+            <a class="pill pill--solid appear appear--btn" style="--d:.82s" href="#contact">상담 신청 <span class="pill__arrow" aria-hidden="true">→</span></a>
+            <a class="pill pill--ghost appear appear--side" style="--d:.92s" href="#services">하는 일 보기</a>
           </div>
-          <span class="svc__idx">01 <span lang="en">Table Ordering</span></span>
-          <h2>QR·NFC 테이블 주문</h2>
-          <p>가게마다 그린 테이블 카드 한 장으로 손님은 앱 없이 주문·결제하고, 사장님은 결제된 주문만 받아요.</p>
-          <a class="svc__link" href="#flow">작동 방식 보기 <span aria-hidden="true">↓</span></a>
-        </li>
-        <li class="svc appear appear--soft" style="--d:1.12s">
-          <div class="svc__vis svc__vis--web" aria-hidden="true">
-            <div class="browser">
-              <div class="browser__bar"><i></i><i></i><i></i><span></span></div>
-              <div class="browser__page">
-                <b></b><b></b><s></s>
-                <div class="browser__row"><u></u><u></u><u></u></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 하는 일 세 가지 -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="services__head">
+          <div>
+            <p class="label reveal"><span lang="en">Services</span> — 하는 일</p>
+            <h2 id="services-title" class="h2 reveal">필요한 걸 직접 만들고,<br><em>끝까지</em> 함께 운영해요.</h2>
+          </div>
+          <p class="body body--muted reveal">기획과 디자인, 개발, 배포와 운영까지 한 팀이 맡아요. 작은 가게의 주문 화면도, 회사의 첫 홈페이지도 같은 기준으로 만듭니다.</p>
+        </div>
+        <ol class="svc-list">
+          <li class="svc reveal">
+            <div class="svc__vis svc__vis--order" aria-hidden="true">
+              <div class="cardbox"><div class="card card--quiet" data-shop="sea"></div></div>
+            </div>
+            <span class="svc__idx">01 <span lang="en">Table Ordering</span></span>
+            <h3>QR·NFC 테이블 주문</h3>
+            <p>가게마다 그린 테이블 카드 한 장으로 손님은 앱 없이 주문·결제하고, 사장님은 결제된 주문만 받아요.</p>
+            <a class="svc__link" href="#flow">작동 방식 보기 <span aria-hidden="true">↓</span></a>
+          </li>
+          <li class="svc reveal">
+            <div class="svc__vis svc__vis--web" aria-hidden="true">
+              <div class="browser">
+                <div class="browser__bar"><i></i><i></i><i></i><span></span></div>
+                <div class="browser__page">
+                  <b></b><b></b><s></s>
+                  <div class="browser__row"><u></u><u></u><u></u></div>
+                </div>
               </div>
             </div>
-          </div>
-          <span class="svc__idx">02 <span lang="en">Websites</span></span>
-          <h2>웹사이트 제작</h2>
-          <p>가게와 회사의 홈페이지를 휴대폰에서 먼저 보기 좋게, 브랜드답게 만들어요. 이 사이트도 오더담이 만들었어요.</p>
-          <a class="svc__link" href="#contact">제작 상담하기 <span aria-hidden="true">→</span></a>
-        </li>
-        <li class="svc appear appear--soft" style="--d:1.24s">
-          <div class="svc__vis svc__vis--app" aria-hidden="true">
-            <div class="mini-phone">
-              <div class="mini-phone__screen">
-                <p>SONO</p>
-                <span class="row"><i></i><b></b></span>
-                <span class="row"><i></i><b></b></span>
-                <span class="row"><i></i><b></b></span>
+            <span class="svc__idx">02 <span lang="en">Websites</span></span>
+            <h3>웹사이트 제작</h3>
+            <p>가게와 회사의 홈페이지를 휴대폰에서 먼저 보기 좋게, 브랜드답게 만들어요. 이 사이트도 오더담이 만들었어요.</p>
+            <a class="svc__link" href="#contact">제작 상담하기 <span aria-hidden="true">→</span></a>
+          </li>
+          <li class="svc reveal">
+            <div class="svc__vis svc__vis--app" aria-hidden="true">
+              <div class="mini-phone">
+                <div class="mini-phone__screen">
+                  <p>SONO</p>
+                  <span class="row"><i></i><b></b></span>
+                  <span class="row"><i></i><b></b></span>
+                  <span class="row"><i></i><b></b></span>
+                </div>
+              </div>
+              <div class="mini-phone mini-phone--back">
+                <div class="mini-phone__screen mini-phone__screen--paws">
+                  <p>포우즈</p>
+                  <span class="tile"></span><span class="tile"></span>
+                </div>
               </div>
             </div>
-            <div class="mini-phone mini-phone--back">
-              <div class="mini-phone__screen mini-phone__screen--paws">
-                <p>포우즈</p>
-                <span class="tile"></span><span class="tile"></span>
-              </div>
-            </div>
-          </div>
-          <span class="svc__idx">03 <span lang="en">Web &amp; App</span></span>
-          <h2>웹·앱 개발</h2>
-          <p>아이디어를 웹 서비스와 앱으로 만들어요. SONO와 포우즈를 직접 만들어 운영하고 있어요.</p>
-          <a class="svc__link" href="#works">만든 것들 보기 <span aria-hidden="true">↓</span></a>
-        </li>
-      </ol>
+            <span class="svc__idx">03 <span lang="en">Web &amp; App</span></span>
+            <h3>웹·앱 개발</h3>
+            <p>아이디어를 웹 서비스와 앱으로 만들어요. SONO와 포우즈를 직접 만들어 운영하고 있어요.</p>
+            <a class="svc__link" href="#works">만든 것들 보기 <span aria-hidden="true">↓</span></a>
+          </li>
+        </ol>
+      </div>
     </section>
 
     <!-- 하는 일 띠 -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker__track">
-        <span>QR Ordering</span><i>✦</i><span>NFC Table Cards</span><i>✦</i><span>Websites</span><i>✦</i><span>Web Apps</span><i>✦</i><span>Mobile Apps</span><i>✦</i><span>Design to Launch</span><i>✦</i>
-        <span>QR Ordering</span><i>✦</i><span>NFC Table Cards</span><i>✦</i><span>Websites</span><i>✦</i><span>Web Apps</span><i>✦</i><span>Mobile Apps</span><i>✦</i><span>Design to Launch</span><i>✦</i>
+        <span>QR Ordering</span><i></i><span>NFC Table Cards</span><i></i><span>Websites</span><i></i><span>Web Apps</span><i></i><span>Mobile Apps</span><i></i><span>Design to Launch</span><i></i>
+        <span>QR Ordering</span><i></i><span>NFC Table Cards</span><i></i><span>Websites</span><i></i><span>Web Apps</span><i></i><span>Mobile Apps</span><i></i><span>Design to Launch</span><i></i>
       </div>
     </div>
 
@@ -263,9 +276,10 @@
 
     <!-- 연락 -->
     <section class="contact" id="contact" aria-labelledby="contact-title">
+      <video class="contact__bg lazy-vid" muted loop playsinline preload="none" aria-hidden="true" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4"></video>
       <div class="wrap">
         <p class="label reveal"><span lang="en">Contact</span> — 상담 신청</p>
-        <p class="contact__en reveal" lang="en">Let’s build something <i>good.</i></p>
+        <p class="contact__en reveal" lang="en">Let’s build <i>something good.</i></p>
         <h2 id="contact-title" class="contact__title reveal">만들고 싶은 게 있다면,<br><em>먼저</em> 이야기해요.</h2>
         <div class="contact__row">
           <p class="body body--muted reveal">테이블 주문 시범 매장, 홈페이지 제작, 웹·앱 개발 무엇이든 괜찮아요. 하고 싶은 일만 알려 주시면 대표가 직접 전화를 받습니다.</p>
