@@ -1,227 +1,174 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" class="js-pending">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>오더담 · QR·NFC 주문, 웹사이트 제작, 웹·앱 개발</title>
-  <meta name="description" content="오더담은 QR·NFC 테이블 주문, 웹사이트 제작, 웹·앱 개발을 하는 소프트웨어 회사입니다. 가게마다 1:1로 디자인한 테이블 카드 한 장으로 손님은 앱 설치 없이 주문·결제하고, 사장님은 결제된 주문만 받습니다.">
-  <meta name="theme-color" content="#0a0a0a">
+  <title>오더담 · 웹과 앱을 만들어 공급하는 소프트웨어 스튜디오</title>
+  <meta name="description" content="오더담은 웹과 앱을 직접 만들어 공급하는 소프트웨어 스튜디오입니다. QR·NFC 테이블 주문, 웹사이트 제작, 웹·앱 개발을 기획부터 운영까지 맡습니다.">
+  <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Nanum+Myeongjo:wght@800&family=Gowun+Batang:wght@700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=Gowun+Batang:wght@700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="styles.css">
-  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="studio.css">
+  <script>
+    // 처음 들어온 방문이면 오프닝을 보여 준다. 같은 탭에서 다시 오면(상세에서 돌아오기 등) 바로 보여 준다
+    (function () {
+      var d = document.documentElement, seen = false;
+      try { seen = sessionStorage.getItem('od.seen') === '1'; } catch (e) {}
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      d.classList.remove('js-pending');
+      d.classList.add('js', seen || reduce ? 'is-return' : 'is-intro');
+    })();
+  </script>
 </head>
-<body>
+<body data-view="v" data-page="work">
   <a class="skip" href="#main">본문으로 건너뛰기</a>
 
-  <header class="nav" id="nav">
-    <a class="mark appear appear--scale" style="--d:.06s" href="#top" aria-label="오더담 처음으로">
-      <svg class="mark__icon" viewBox="0 0 28 20" aria-hidden="true"><rect x="1" y="1" width="26" height="18" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="14" cy="10" r="3" fill="var(--accent)"/></svg>
-      <span>오더담</span>
-    </a>
-    <nav class="nav__links appear appear--soft" style="--d:.16s" aria-label="주요 메뉴">
-      <a href="#services">하는 일</a>
-      <a href="#works">만든 것들</a>
-      <a href="#contact">문의</a>
-    </nav>
-    <a class="nav__product appear appear--soft" style="--d:.22s" href="table-order.html"><span lang="en">Our Product</span><b>테이블 오더 <svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></b></a>
-    <a class="pill pill--solid appear appear--side" style="--d:.28s" href="#contact">상담 신청</a>
+  <div id="veil" aria-hidden="true"></div>
+  <p id="count" aria-hidden="true">00</p>
+
+  <header id="hd">
+    <a id="hd-title" href="#work" aria-label="오더담 처음으로"><span class="wm">ORDERDAM</span></a>
+    <div id="hd-right">
+      <nav id="hd-menu" aria-label="주요 메뉴"><a class="hd-in ul is-on" href="#work" data-nav="work" style="--ld:.05s">작업</a><span class="hd-in" style="--ld:.08s">,&nbsp;</span><a class="hd-in ul" href="#about" data-nav="about" style="--ld:.1s">소개</a></nav>
+      <p id="hd-time"><span class="hd-in" style="--ld:.15s"><span id="clock">KST</span></span></p>
+      <p id="hd-contact_"><a id="hd-contact" class="hd-in" href="tel:01092845963" style="--ld:.2s" aria-live="polite">상담</a></p>
+    </div>
   </header>
 
+  <aside id="fix" aria-label="오더담 소개">
+    <p class="split">오더담은 웹과 앱을 직접 만들어 공급하는 소프트웨어 스튜디오입니다. 가게의 QR·NFC 테이블 주문부터 회사 홈페이지, 새 서비스까지 만들고, 만든 뒤에도 함께 운영합니다.</p>
+    <p><span class="ln_"><span class="ln" style="--ld:.3s">상담:</span></span><span class="ln_"><span class="ln" style="--ld:.36s"><a class="ul-out" href="tel:01092845963">010-9284-5963</a></span></span></p>
+  </aside>
+
+  <div id="sym" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <path class="l" d="M50.6 0H18A18 18 0 0 0 0 18V82A18 18 0 0 0 18 100H50.6V80H26A10 10 0 0 1 16 70V30A10 10 0 0 1 26 20H50.6Z"/>
+      <path class="r" d="M49.4 0H82A18 18 0 0 1 100 18V82A18 18 0 0 1 82 100H49.4V80H74A10 10 0 0 0 84 70V30A10 10 0 0 0 74 20H49.4Z"/>
+      <circle class="dot" cx="50" cy="50" r="6"/>
+    </svg>
+  </div>
+  <div id="win" aria-hidden="true"><div class="win-in"></div></div>
+
   <main id="main">
-    <!-- 첫 화면: 흐르는 영상 타일 + 큰 이름 + 회사 소개 -->
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="reel appear appear--fade" style="--d:.1s" aria-hidden="true">
-        <div class="reel__track">
-          <figure class="reel__item" style="--h:74%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260505_101331_74f9b798-3f00-4e86-8a01-377aa16ffeaa.mp4"></video></figure>
-          <figure class="reel__item" style="--h:96%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4"></video></figure>
-          <figure class="reel__item" style="--h:66%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"></video></figure>
-          <figure class="reel__item" style="--h:88%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260601_110537_3a579fa0-7bbc-4d94-9d25-0e816c7840f5.mp4"></video></figure>
-          <figure class="reel__item" style="--h:70%"><video muted loop playsinline preload="none" data-src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_080021_d598092b-c4c2-4e53-8e46-94cf9064cd50.mp4"></video></figure>
-        </div>
-      </div>
+    <!-- 작업물: 세로·가로·그리드가 같은 타일을 공유한다 -->
+    <section id="work" aria-labelledby="work-title">
+      <h1 id="work-title" class="sr">오더담 — 웹과 앱을 만들어 공급하는 소프트웨어 스튜디오. 작업물 3개</h1>
+      <div id="stage"></div>
 
-      <div class="hero__base">
-        <p class="wordmark appear appear--mask" style="--d:.3s" aria-hidden="true"><span>ORDERDAM</span></p>
-        <div class="hero__side">
-          <p class="eyebrow appear appear--soft" style="--d:.5s"><i class="dot"></i><span lang="en">Software Studio ©2026</span></p>
-          <h1 id="hero-title" class="hero__title appear appear--soft" style="--d:.6s">웹과 앱을 만들어<br>공급합니다.</h1>
-          <p class="hero__lede appear appear--soft" style="--d:.7s">가게의 QR·NFC 주문 시스템부터 회사 홈페이지, 새 서비스의 웹과 앱까지. 오더담이 직접 만들고, 만든 뒤에도 함께 운영합니다.</p>
-          <div class="hero__actions">
-            <a class="pill pill--solid appear appear--btn" style="--d:.82s" href="#contact">상담 신청 <svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
-            <a class="pill pill--ghost appear appear--side" style="--d:.92s" href="#services">하는 일 보기</a>
-          </div>
-        </div>
-      </div>
-    </section>
+      <nav id="ti-v" class="ti" data-for="v" aria-label="작업물 목록"><div></div></nav>
+      <div id="me-v" data-for="v" aria-hidden="true"><div class="me-in"></div></div>
 
-    <!-- 하는 일: 벤토 그리드 (큰 칸 1 + 작은 칸 4, 카드마다 메시지 하나) -->
-    <section class="services" id="services" aria-labelledby="services-title">
-      <div class="wrap">
-        <div class="services__head">
-          <p class="label reveal"><span lang="en">Services</span> — 하는 일</p>
-          <h2 id="services-title" class="h2 reveal">필요한 걸 직접 만들고,<br><em>끝까지</em> 함께 운영해요.</h2>
-        </div>
-        <ul class="bento">
-          <li class="svc bento__big reveal">
-            <span class="svc__idx">01 <span lang="en">Table Ordering</span></span>
-            <h3>카드 한 장으로 주문부터 결제까지.</h3>
-            <p>손님은 앱 없이 주문·결제하고, 사장님은 결제된 주문만 받아요.</p>
-            <a class="svc__link" href="table-order.html">테이블 오더 보기 <span aria-hidden="true">→</span></a>
-            <div class="svc__vis svc__vis--order" aria-hidden="true">
-              <div class="cardbox"><div class="card card--quiet" data-shop="youth"></div></div>
-            </div>
-          </li>
-          <li class="svc reveal">
-            <span class="svc__idx">02 <span lang="en">Websites</span></span>
-            <h3>휴대폰에서 먼저 보기 좋은 홈페이지.</h3>
-            <div class="svc__vis svc__vis--web" aria-hidden="true">
-              <div class="browser">
-                <div class="browser__bar"><i></i><i></i><i></i><span></span></div>
-                <div class="browser__page">
-                  <b></b><b></b><s></s>
-                  <div class="browser__row"><u></u><u></u><u></u></div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="svc reveal">
-            <span class="svc__idx">03 <span lang="en">Web &amp; App</span></span>
-            <h3>아이디어를 웹 서비스와 앱으로.</h3>
-            <div class="svc__vis svc__vis--app" aria-hidden="true">
-              <div class="mini-phone">
-                <div class="mini-phone__screen">
-                  <p>SONO</p>
-                  <span class="row"><i></i><b></b></span>
-                  <span class="row"><i></i><b></b></span>
-                  <span class="row"><i></i><b></b></span>
-                </div>
-              </div>
-              <div class="mini-phone mini-phone--back">
-                <div class="mini-phone__screen mini-phone__screen--paws">
-                  <p>포우즈</p>
-                  <span class="tile"></span><span class="tile"></span>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="svc reveal">
-            <span class="svc__idx">04 <span lang="en">One Team</span></span>
-            <h3>기획부터 배포까지 한 팀이 맡아요.</h3>
-            <p class="flow-line" aria-label="작업 순서">기획 <i>—</i> 디자인 <i>—</i> 개발 <i>—</i> <b>배포</b></p>
-          </li>
-          <li class="svc reveal">
-            <span class="svc__idx">05 <span lang="en">Operations</span></span>
-            <h3>만든 뒤에도 함께 운영해요.</h3>
-            <div class="ops" aria-hidden="true">
-              <p><i></i>site<span>배포 완료</span></p>
-              <p><i></i>sono<span>운영 중</span></p>
-              <p><i class="is-wait"></i>paws<span>준비 중</span></p>
-            </div>
-          </li>
+      <div id="ti-h" class="ti" data-for="h" aria-hidden="true"><div></div></div>
+      <div id="me-h" data-for="h" aria-hidden="true"><div class="me-box"><div class="me-in"></div><i class="line"></i></div></div>
+
+      <div id="me-g" data-for="g" aria-hidden="true"><div><span></span></div><div><span></span></div><div><span></span></div><div><span></span></div></div>
+      <p id="big" data-for="g" aria-hidden="true"><span></span></p>
+
+      <div id="modes" role="group" aria-label="작업물 보기 방식"><button type="button" data-mode="v" class="is-on" aria-pressed="true" style="--ld:.05s">세로</button><span class="cm">,&nbsp;</span><button type="button" data-mode="h" aria-pressed="false" style="--ld:.1s">가로</button><span class="cm">,&nbsp;</span><button type="button" data-mode="g" aria-pressed="false" style="--ld:.15s">그리드</button></div>
+      <p id="cp"><span class="ln_"><span class="ln" style="--ld:.2s">© 2026 오더담</span></span></p>
+
+      <noscript>
+        <ul style="position:relative;z-index:30;padding:12rem 1rem;font-size:16px;line-height:1.6">
+          <li><a href="table-order.html">01 오더담 테이블 오더</a></li>
+          <li>02 SONO — 웹소설 작가를 위한 설정 노트와 인물 관계도</li>
+          <li><a href="https://paws-neighborhood-life.hskim3514253.chatgpt.site">03 포우즈 Paws</a></li>
+          <li><a href="tel:01092845963">상담 010-9284-5963</a></li>
         </ul>
-      </div>
+      </noscript>
     </section>
 
-    <!-- 일하는 방식: 다섯 단계가 궤도를 돈다 -->
-    <section class="process" id="process" aria-labelledby="process-title">
-      <div class="wrap process__grid">
-        <div class="process__copy">
-          <p class="label reveal"><span lang="en">How We Work</span> — 일하는 방식</p>
-          <h2 id="process-title" class="h2 reveal">한 팀이 처음부터<br><em>끝까지</em> 맡아요.</h2>
-          <div class="process__detail reveal" aria-live="polite">
-            <p class="process__step" data-step-en>01 <span lang="en">Plan</span></p>
-            <h3 data-step-ko>기획</h3>
-            <p data-step-text>무엇을 만들지, 누가 쓸지부터 같이 정해요. 화면 흐름과 일정을 한 장으로 정리해 드려요.</p>
-          </div>
-        </div>
-        <div class="orbit reveal" data-orbit data-steps='[["Plan","기획","무엇을 만들지, 누가 쓸지부터 같이 정해요. 화면 흐름과 일정을 한 장으로 정리해 드려요."],["Design","디자인","휴대폰 화면부터 그려요. 브랜드의 색과 글씨에 맞춘 시안을 보고 고를 수 있어요."],["Build","개발","주문과 결제처럼 틀리면 안 되는 부분은 서버에서 한 번 더 확인하도록 만들어요."],["Launch","배포","실제 주소에 올리고, 휴대폰과 컴퓨터에서 직접 확인한 뒤 공개해요."],["Run","운영","공개한 뒤에도 고치고 더해요. 문의는 대표가 직접 받아요."]]'>
-          <div class="orbit__ring" aria-hidden="true"></div>
-          <div class="orbit__ring orbit__ring--in" aria-hidden="true"></div>
-          <div class="orbit__core" aria-hidden="true"><span>Orderdam</span></div>
-          <button class="orbit__node" type="button" data-i="0" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/></svg><span>기획</span></button>
-          <button class="orbit__node" type="button" data-i="1" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg><span>디자인</span></button>
-          <button class="orbit__node" type="button" data-i="2" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><span>개발</span></button>
-          <button class="orbit__node" type="button" data-i="3" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 2 5 5 5 9l-2 3H9l-2-3c0-4 2-7 5-9z"/><path d="M10 18l-1 3M14 18l1 3"/><circle cx="12" cy="10" r="1.6"/></svg><span>배포</span></button>
-          <button class="orbit__node" type="button" data-i="4" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg><span>운영</span></button>
-        </div>
+    <!-- 스튜디오 소개 -->
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title" class="sr">스튜디오 소개</h2>
+      <div class="ab-intro">
+        <p class="ab-lead split">오더담은 웹과 앱을 직접 만들어 공급하는 소프트웨어 스튜디오입니다. 가게의 <a href="table-order.html">QR·NFC 테이블 주문</a>부터 회사 홈페이지, 새 서비스의 웹과 앱까지 기획에서 운영까지 한 팀이 맡습니다. 지금은 <a href="table-order.html">오더담 테이블 오더</a>, <a href="#sono">SONO</a>, <a href="https://paws-neighborhood-life.hskim3514253.chatgpt.site" target="_blank" rel="noopener">포우즈</a>를 직접 만들어 운영합니다. 대표가 직접 상담하고, 만든 뒤에도 함께 고치고 더합니다.</p>
+        <div class="ab-ghost" aria-hidden="true"></div>
       </div>
-    </section>
 
-    <!-- 하는 일 띠 -->
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker__track">
-        <span>QR Ordering</span><i></i><span>NFC Table Cards</span><i></i><span>Websites</span><i></i><span>Web Apps</span><i></i><span>Mobile Apps</span><i></i><span>Design to Launch</span><i></i>
-        <span>QR Ordering</span><i></i><span>NFC Table Cards</span><i></i><span>Websites</span><i></i><span>Web Apps</span><i></i><span>Mobile Apps</span><i></i><span>Design to Launch</span><i></i>
-      </div>
-    </div>
-
-    <!-- 만든 것들 -->
-    <section class="sheet sheet--dark" id="works-sec" aria-labelledby="works-title">
-      <div class="wrap works works--first" id="works" aria-labelledby="works-title">
-        <p class="label reveal"><span lang="en">Selected Work</span> — 만든 것들</p>
-        <h2 id="works-title" class="h2 h2--sm reveal">직접 만들어 운영하는 것들</h2>
-        <ul class="work-list">
-          <li class="reveal"><span class="work__idx">01</span><h3 data-hp-trigger="to"><a href="table-order.html">오더담 테이블 오더</a></h3><p>테이블 카드 한 장으로 여는 QR·NFC 주문과 결제.</p></li>
-          <li class="reveal"><span class="work__idx">02</span><h3 data-hp-trigger="sono">SONO</h3><p>웹소설 작가를 위한 설정 노트와 인물 관계도.</p></li>
-          <li class="reveal"><span class="work__idx">03</span><h3 data-hp-trigger="paws">포우즈 <small>Paws</small></h3><p>반려동물과 함께 갈 수 있는 곳 찾기. <a href="https://paws-neighborhood-life.hskim3514253.chatgpt.site" target="_blank" rel="noopener">둘러보기 ↗</a></p></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 연락 -->
-    <section class="contact" id="contact" aria-labelledby="contact-title">
-      <canvas class="contact__bg contact__dots" aria-hidden="true"></canvas>
-      <div class="wrap">
-        <p class="label reveal"><span lang="en">Contact</span> — 상담 신청</p>
-        <p class="contact__en reveal" lang="en">Let’s build <i>something good.</i></p>
-        <h2 id="contact-title" class="contact__title reveal">만들고 싶은 게 있다면,<br><em>먼저</em> 이야기해요.</h2>
-        <div class="contact__row">
-          <p class="body body--muted reveal">테이블 주문 시범 매장, 홈페이지 제작, 웹·앱 개발 무엇이든 괜찮아요. 하고 싶은 일만 알려 주시면 대표가 직접 전화를 받습니다.</p>
-          <div class="reveal">
-            <a class="bignum" href="tel:01092845963">010-9284-5963</a>
-            <div class="contact__actions">
-              <a class="pill pill--solid" href="tel:01092845963">전화하기 <svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
-              <a class="pill pill--ghost" href="sms:01092845963?body=%EC%98%A4%EB%8D%94%EB%8B%B4%20%EC%8B%9C%EB%B2%94%20%EB%A7%A4%EC%9E%A5%20%EB%AC%B8%EC%9D%98%3A%20">문자 보내기</a>
+      <div class="ab-scene" id="process">
+        <div class="ab-sticky">
+          <div class="ab-steps">
+            <h2>일하는 방식</h2>
+            <ol>
+              <li><button type="button" data-step="0" class="is-on" aria-pressed="true">기획</button></li>
+              <li><button type="button" data-step="1" aria-pressed="false">디자인</button></li>
+              <li><button type="button" data-step="2" aria-pressed="false">개발</button></li>
+              <li><button type="button" data-step="3" aria-pressed="false">배포</button></li>
+              <li><button type="button" data-step="4" aria-pressed="false">운영</button></li>
+            </ol>
+            <div class="ab-step-text" aria-live="polite">
+              <p class="is-on">무엇을 만들지, 누가 쓸지부터 같이 정해요. 화면 흐름과 일정을 한 장으로 정리해 드려요.</p>
+              <p>휴대폰 화면부터 그려요. 브랜드의 색과 글씨에 맞춘 시안을 보고 고를 수 있어요.</p>
+              <p>주문과 결제처럼 틀리면 안 되는 부분은 서버에서 한 번 더 확인하도록 만들어요.</p>
+              <p>실제 주소에 올리고, 휴대폰과 컴퓨터에서 직접 확인한 뒤 공개해요.</p>
+              <p>공개한 뒤에도 고치고 더해요. 문의는 대표가 직접 받아요.</p>
             </div>
           </div>
+          <p class="ab-step-n" aria-hidden="true"><span id="step-n">01</span> / 05</p>
         </div>
       </div>
+
+      <div class="ab-info">
+        <section class="c1" aria-labelledby="ab-do">
+          <h3 id="ab-do">하는 일</h3>
+          <ul>
+            <li><a href="table-order.html">QR·NFC 테이블 주문</a> — 카드 한 장으로 주문부터 결제까지</li>
+            <li>웹사이트 제작 — 휴대폰에서 먼저 보기 좋은 홈페이지</li>
+            <li>웹·앱 개발 — 아이디어를 웹 서비스와 앱으로</li>
+          </ul>
+        </section>
+        <section class="c2" aria-labelledby="ab-works">
+          <h3 id="ab-works">만든 것들</h3>
+          <ul>
+            <li>01 <a href="table-order.html">오더담 테이블 오더</a> <span class="grey">시범 운영 준비 중</span></li>
+            <li>02 <a href="#sono">SONO</a> <span class="grey">운영 중</span></li>
+            <li>03 <a href="https://paws-neighborhood-life.hskim3514253.chatgpt.site" target="_blank" rel="noopener">포우즈 Paws</a> <span class="grey">웹 운영 중 · 앱 준비 중</span></li>
+          </ul>
+        </section>
+        <section class="c3" id="contact" aria-labelledby="ab-call">
+          <h3 id="ab-call">상담 신청</h3>
+          <p>테이블 주문 시범 매장, 홈페이지 제작, 웹·앱 개발 무엇이든 괜찮아요. 대표가 직접 받습니다.</p>
+          <p style="margin-top:1.3rem"><a href="tel:01092845963">전화 010-9284-5963</a><br><a href="sms:01092845963?body=%EC%98%A4%EB%8D%94%EB%8B%B4%20%EC%83%81%EB%8B%B4%20%EB%AC%B8%EC%9D%98%3A%20">문자 보내기</a></p>
+        </section>
+        <section class="c1" aria-labelledby="ab-biz">
+          <h3 id="ab-biz">사업자 정보</h3>
+          <dl>
+            <div><dt>상호</dt><dd>오더담</dd></div>
+            <div><dt>대표</dt><dd>김현석</dd></div>
+            <div><dt>사업자등록번호</dt><dd>671-22-02457</dd></div>
+            <div><dt>업종</dt><dd>소프트웨어 개발 및 공급업</dd></div>
+            <div><dt>주소</dt><dd>전남광주통합특별시 북구 무등로 180번길 12 32호</dd></div>
+          </dl>
+        </section>
+      </div>
+      <div class="ab-word" aria-hidden="true"><p>ORDERDAM</p></div>
+    </section>
+
+    <!-- SONO 상세: 별도 주소가 없어 이 페이지 안에서 보여 준다 -->
+    <section id="sono" class="dt" aria-labelledby="sono-title">
+      <div class="dt-info">
+        <h2 id="sono-title" class="dt-title">SONO</h2>
+        <div class="dt-meta">
+          <p>웹소설, 글쓰기 도구</p>
+          <p>기획, 디자인, 웹 개발, 운영</p>
+          <p class="grey">운영 중</p>
+          <div class="dt-note"><div class="is-on"><b>설정 노트와 인물 관계도</b><p>웹소설 작가가 인물과 설정을 한곳에 적고, 인물 사이의 관계를 그림으로 정리하는 도구예요. 오른쪽 그림은 화면 구성을 설명하려고 오더담이 다시 그린 것이에요.</p></div></div>
+        </div>
+      </div>
+      <div class="dt-media">
+        <div class="dt-panel"><div class="pn pn--paper" data-art="sono-notes"></div></div>
+        <div class="dt-panel"><div class="pn pn--paper" data-art="sono-graph"></div></div>
+        <div class="dt-panel"><div class="pn pn--ink" data-art="sono-type"></div></div>
+      </div>
+      <a class="dt-back ul-out" href="#work" data-back>뒤로</a>
     </section>
   </main>
 
-  <footer class="foot">
-    <div class="wrap">
-      <p class="mark mark--foot"><svg class="mark__icon" viewBox="0 0 28 20" aria-hidden="true"><rect x="1" y="1" width="26" height="18" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="14" cy="10" r="3" fill="var(--accent)"/></svg><span>오더담</span><small>ORDERDAM</small></p>
-      <dl class="biz">
-        <div><dt>상호</dt><dd>오더담</dd></div>
-        <div><dt>대표</dt><dd>김현석</dd></div>
-        <div><dt>사업자등록번호</dt><dd>671-22-02457</dd></div>
-        <div><dt>업종</dt><dd>소프트웨어 개발 및 공급업</dd></div>
-        <div class="biz__wide"><dt>주소</dt><dd>전남광주통합특별시 북구 무등로 180번길 12 32호</dd></div>
-        <div><dt>연락처</dt><dd><a href="tel:01092845963">010-9284-5963</a></dd></div>
-      </dl>
-      <p class="copy">© 2026 오더담 ORDERDAM</p>
-    </div>
-  </footer>
-
-
-  <!-- 만든 것들: 이름에 마우스를 올리면 뜨는 미리보기 (마우스가 있는 기기에서만) -->
-  <div class="hp" aria-hidden="true">
-    <div class="hp__item" data-hp="to"><div class="cardbox"><div class="card card--quiet" data-shop="youth"></div></div></div>
-    <div class="hp__item hp__item--app" data-hp="sono">
-      <div class="mini-phone"><div class="mini-phone__screen"><p>SONO</p><span class="row"><i></i><b></b></span><span class="row"><i></i><b></b></span><span class="row"><i></i><b></b></span><span class="row"><i></i><b></b></span></div></div>
-      <p class="hp__cap">설정 노트 · 인물 관계도</p>
-    </div>
-    <div class="hp__item hp__item--app" data-hp="paws">
-      <div class="mini-phone"><div class="mini-phone__screen mini-phone__screen--paws"><p>포우즈</p><span class="tile"></span><span class="tile"></span><span class="tile"></span></div></div>
-      <p class="hp__cap">반려동물과 함께 갈 수 있는 곳</p>
-    </div>
-  </div>
-  <div class="grain" aria-hidden="true"></div>
-  <script src="app.js" defer></script>
+  <script src="cards.js" defer></script>
+  <script src="arts.js" defer></script>
+  <script src="home.js" defer></script>
 </body>
 </html>
