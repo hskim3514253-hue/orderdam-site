@@ -164,21 +164,13 @@
   }
 
   // ── 심벌: 줄 보기에서는 벌어지고, 그리드에서는 닫힌다 (그리드에서 마우스를 올리면 다시 벌어진다)
-  let lastSpread = null, symZ = 0;
+  let lastSpread = null;
   function updateSpread() {
     let sp = 0;
     const open = Math.max(0, TW * (mobile ? 1.03 : 1.076) / 2 + (mobile ? .6 : 1.2) * rem - symW * .25);
     if (page === 'work' && ready) sp = view === 'g' ? (hovered >= 0 ? open : 0) : open;
     // 심벌은 SVG라 이동 거리를 그림 단위(가로 100)로 바꿔 준다
-    if (sp !== lastSpread) {
-      const sym = $('#sym');
-      sym.style.setProperty('--spread', `${(sp / (symW / 100)).toFixed(3)}px`);
-      // 문이 열려 있으면 타일 뒤로 보내 아치와 상판이 카드를 가리지 않게 한다. 닫힐 때는 다 닫힌 뒤 앞으로 나온다
-      clearTimeout(symZ);
-      if (sp > 0) sym.classList.add('is-back');
-      else symZ = setTimeout(() => sym.classList.remove('is-back'), 1000);
-      lastSpread = sp;
-    }
+    if (sp !== lastSpread) { $('#sym').style.setProperty('--spread', `${(sp / (symW / 100)).toFixed(3)}px`); lastSpread = sp; }
   }
 
   // ── 목록과 정보 줄

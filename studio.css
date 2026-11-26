@@ -1,25 +1,25 @@
 /* 오더담 스튜디오 — 흰 바탕, 검은 글자, 12칸 격자. 1rem = 화면 폭의 1/144 (1440px에서 10px) */
 /* 배경: 노출 콘크리트 (얼룩·결·기공 + 거푸집 이음매와 폼타이 구멍) */
-html { color: #000; background-color: #d7d4ce; background-image: url(assets/formwork.svg), url(assets/concrete.svg); background-size: 1200px 600px, 600px 600px; background-attachment: fixed, fixed; }
+html { color: #000; background-color: #dddad5; background-image: url(assets/formwork.svg), url(assets/concrete.svg); background-size: 1200px 600px, 600px 600px; background-attachment: fixed, fixed; }
 body { color: #000; background: transparent; }
 @media (max-width: 767px) { html { background-size: 720px 360px, 420px 420px; } }
 :root {
   --m: 1rem; --g: 1rem;
   --c: calc((100vw - (var(--m) * 2 + var(--g) * 11)) / 12);
-  --grey: #5f5c57;          /* 콘크리트 위에서도 읽히는 회색 */
-  --concrete: #d7d4ce;
+  --grey: #45423e;          /* 콘크리트 위에서도 읽히는 회색 */
+  --concrete: #dddad5;
   --e1: cubic-bezier(.16, 1, .3, 1);
   --e2: cubic-bezier(.19, 1, .22, 1);
   --sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --t: max(1.2rem, 11.5px);           /* 작은 글자: 한글이라 원본(1.1rem)보다 한 단계 크게 */
   --lh: 1.32;
-  --sym-w: 16rem;                      /* 가운데 심벌(손가락 프레임) 크기 */
+  --sym-w: 16rem;                      /* 가운데 심벌(대괄호) 크기 */
   --spread: 0px;                       /* 심벌 양쪽이 벌어진 거리 */
   --sym-y: 0px;
 }
 html { font-size: 0.694444vw; -webkit-text-size-adjust: none; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; font-family: var(--sans); font-size: var(--t); line-height: var(--lh); letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: break-word; overscroll-behavior: none; }
+body { margin: 0; font-family: var(--sans); font-size: var(--t); font-weight: 500; line-height: var(--lh); letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: break-word; overscroll-behavior: none; }
 h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 a { color: inherit; text-decoration: none; }
@@ -68,10 +68,8 @@ img { display: block; max-width: 100%; }
 #fix.is-hidden { opacity: 0; pointer-events: none; }
 
 /* ── 가운데 심벌 (오더담 로고의 카드 모양에서 따온 두 조각) ───────── */
-#sym { position: fixed; z-index: 55; left: 50%; top: calc(50% + var(--sym-y)); width: var(--sym-w); aspect-ratio: 1; transform: translate(-50%, -50%); color: #1a1917; pointer-events: none; transition: width 1.6s var(--e2); filter: drop-shadow(.3rem .5rem .7rem rgb(40 36 30 / .35)); }
+#sym { position: fixed; z-index: 55; left: 50%; top: calc(50% + var(--sym-y)); width: var(--sym-w); aspect-ratio: 1; transform: translate(-50%, -50%); color: #fff; mix-blend-mode: difference; pointer-events: none; transition: width 1.6s var(--e2); }
 #sym.no-t { transition: none !important; }
-#sym.is-back { z-index: 9; }
-body[data-page="detail"] #sym { z-index: 4; }   /* 상세에서는 오른쪽 작업 사진 뒤로 반쯤 숨는다 */
 #sym svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; fill: currentColor; }
 #sym .l, #sym .r { transition: transform 1s var(--e1); }
 #sym .l { transform: translateX(calc(var(--spread) * -1)); }
@@ -229,7 +227,7 @@ body[data-page="about"] #stage, body[data-page="sono"] #stage { pointer-events: 
   #me-v .me-row > .nm { display: block; }
   #me-v .me-row > span:nth-child(2), #me-v .me-row > span:nth-child(3) { display: none; }
   #me-v .me-row > span:nth-child(4) { width: auto; }
-  #me-v, #modes, #cp { background: rgb(215 212 206 / .94); box-shadow: 0 0 0 .4rem rgb(215 212 206 / .94); }
+  #me-v, #modes, #cp { background: rgb(221 218 213 / .94); box-shadow: 0 0 0 .4rem rgb(221 218 213 / .94); }
   #me-g { top: auto; bottom: 4.2rem; transform: none; }
   #me-g > div:nth-child(2), #me-g > div:nth-child(3) { display: none; }
   #me-g > div:nth-child(1) { width: auto; flex: 1; }
@@ -347,7 +345,7 @@ body[data-page="about"] #about { visibility: visible; opacity: 1; transition: op
   .dt-note { display: none; }
   .dt-media { margin-left: 0; width: 100%; }
   .dt-pos { display: none; }
-  .dt-back { position: fixed; background: rgb(215 212 206 / .94); padding: .4rem .6rem; margin: -.4rem -.6rem; }
+  .dt-back { position: fixed; background: rgb(221 218 213 / .94); padding: .4rem .6rem; margin: -.4rem -.6rem; }
   .pn-list { font-size: 4.2cqw; }
   .pn-h { font-size: 7cqw; }
   .pn-h small { font-size: 3.6cqw; }
