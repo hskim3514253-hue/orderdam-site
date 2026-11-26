@@ -1,13 +1,15 @@
 /* 오더담 스튜디오 — 흰 바탕, 검은 글자, 12칸 격자. 1rem = 화면 폭의 1/144 (1440px에서 10px) */
-/* 배경: 노출 콘크리트 (얼룩·결·기공 + 거푸집 이음매와 폼타이 구멍) */
-html { color: #000; background-color: #e9e7e3; background-image: url(assets/formwork.svg), url(assets/concrete.svg); background-size: 1200px 600px, 600px 600px; background-attachment: fixed, fixed; }
+html { color: #000; background-color: #e2e0dd; }
+/* 배경: 실제 노출 콘크리트 사진(이음매 없이 이어지는 재질). 화면에 고정된 층으로 깔아야 휴대폰에서도 전체에 깔린다
+   (background-attachment: fixed 는 휴대폰 브라우저에서 일부만 그려진다) */
+html::before { content: ""; position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; height: 100lvh; z-index: -1; background: #e2e0dd url(assets/concrete.jpg) 0 0 / 110rem 110rem; pointer-events: none; }
 body { color: #000; background: transparent; }
-@media (max-width: 767px) { html { background-size: 720px 360px, 420px 420px; } }
+@media (max-width: 767px) { html::before { background-size: 60rem 60rem; } }
 :root {
   --m: 1rem; --g: 1rem;
   --c: calc((100vw - (var(--m) * 2 + var(--g) * 11)) / 12);
   --grey: #45423e;          /* 콘크리트 위에서도 읽히는 회색 */
-  --concrete: #e9e7e3;
+  --concrete: #e2e0dd;
   --e1: cubic-bezier(.16, 1, .3, 1);
   --e2: cubic-bezier(.19, 1, .22, 1);
   --sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
@@ -238,7 +240,7 @@ body[data-page="about"] #stage, body[data-page="sono"] #stage { pointer-events: 
   /* 그리드 보기: 가운데 줄에 이름과 번호 */
   #me-g > div:nth-child(2), #me-g > div:nth-child(3) { display: none; }
   #me-g > div:nth-child(1) { width: auto; flex: 1; }
-  body[data-view="g"] #modes, body[data-view="g"] #cp { background: rgb(233 231 227 / .94); box-shadow: 0 0 0 .4rem rgb(233 231 227 / .94); }
+  body[data-view="g"] #modes, body[data-view="g"] #cp { background: rgb(226 224 221 / .94); box-shadow: 0 0 0 .4rem rgb(226 224 221 / .94); }
   /* 소개·상세처럼 글이 위로 지나가는 화면에서만 상단 뒤에 띠를 깐다 */
   body:not([data-page="work"])::before { content: ""; position: fixed; left: 0; right: 0; top: 0; height: 5.8rem; z-index: 45; background: var(--concrete); border-bottom: 1px solid rgb(0 0 0 / .1); pointer-events: none; }
   body[data-page="about"] #cp, body[data-page="about"] #fix { display: none; }
@@ -358,7 +360,7 @@ body[data-page="about"] #about { visibility: visible; opacity: 1; transition: op
   .dt-note { display: none; }
   .dt-media { margin-left: 0; width: 100%; }
   .dt-pos { display: none; }
-  .dt-back { position: fixed; background: rgb(233 231 227 / .94); padding: .4rem .6rem; margin: -.4rem -.6rem; }
+  .dt-back { position: fixed; background: rgb(226 224 221 / .94); padding: .4rem .6rem; margin: -.4rem -.6rem; }
   .pn-list { font-size: 4.2cqw; }
   .pn-h { font-size: 7cqw; }
   .pn-h small { font-size: 3.6cqw; }
