@@ -51,7 +51,7 @@ em { font-style: normal; }
 
 /* ── 글자: 한글은 Pretendard, 영어는 Instrument Sans, 라벨은 DM Mono ─────────────────────────── */
 [lang="en"] { font-family: var(--display); letter-spacing: -0.01em; }
-.h2, .hero__title, .chapter h3, .contact__title, .svc h3, .work-list h3 { font-family: var(--display), var(--sans); }
+.h2, .hero__title, .to-hero__title, .chapter h3, .contact__title, .svc h3, .work-list h3 { font-family: var(--display), var(--sans); }
 .label {
   display: flex; align-items: center; gap: 12px;
   font-size: .8rem; font-weight: 600; letter-spacing: .02em; color: hsl(var(--fg) / .6);
@@ -172,6 +172,26 @@ em { font-style: normal; }
 .nav__links a { position: relative; padding: 8px 14px; font-size: .92rem; font-weight: 600; color: hsl(var(--fg) / .8); text-decoration: none; border-radius: 999px; transition: color 200ms, background-color 200ms; }
 .nav__links a:hover { color: hsl(var(--fg)); background: hsl(var(--fg) / .1); }
 
+/* 사이드바의 제품 버튼: 테이블 오더 페이지로 (그 페이지에서는 홈으로) */
+.nav__product {
+  display: grid; gap: 2px; padding: 12px 14px; border-radius: 14px; text-decoration: none; color: hsl(var(--fg));
+  background: rgb(var(--accent-rgb) / .1); box-shadow: inset 0 0 0 1px rgb(var(--accent-rgb) / .4);
+  transition: background-color 120ms var(--ease-state), translate 90ms var(--ease-state);
+}
+.nav__product span { font-family: var(--mono); font-size: .7rem; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: hsl(var(--fg) / .6); }
+.nav__product b { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: .98rem; font-weight: 600; white-space: nowrap; }
+.nav__product--back { background: rgb(255 255 255 / .06); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+@media (hover: hover) and (pointer: fine) {
+  .nav__product:hover { background: rgb(var(--accent-rgb) / .2); translate: 0 -1px; }
+  .nav__product--back:hover { background: rgb(255 255 255 / .12); }
+  .nav__product:hover .m-arrow__stem { opacity: 1; transform: none; }
+  .nav__product:hover .m-arrow__head { transform: translateX(3px); }
+}
+.nav__product:active { translate: 0 1px; }
+.nav.is-light .nav__product { color: hsl(var(--ink)); background: rgb(var(--accent-rgb) / .35); box-shadow: inset 0 0 0 1px rgb(0 0 0 / .1); }
+.nav.is-light .nav__product span { color: hsl(var(--ink) / .6); }
+.nav.is-light .nav__product--back { background: rgb(0 0 0 / .05); }
+
 /* 넓은 화면: 왼쪽에 세로로 고정된 유리 사이드바. 본문은 그만큼 오른쪽으로 */
 @media (min-width: 1081px) {
   :root { --side: 224px; }
@@ -188,7 +208,9 @@ em { font-style: normal; }
   .nav__links a { padding: 11px 12px; border-radius: 12px; font-size: .95rem; }
   .nav__links a.is-here { color: hsl(var(--fg)); background: hsl(var(--fg) / .1); }
   .nav.is-light .nav__links a.is-here { color: hsl(var(--ink)); background: hsl(var(--ink) / .08); }
-  .nav .pill { margin-top: auto; width: 100%; }
+  .nav__product { margin-top: auto; }
+  .nav .pill { width: 100%; }
+  .nav:not(:has(.nav__product)) .pill { margin-top: auto; }
 }
 
 /* ── 첫 화면: 흐르는 영상 타일 + 큰 이름 ─────────────────────────── */
@@ -229,6 +251,17 @@ em { font-style: normal; }
 /* 밝은 첫 화면 위의 보조 버튼: 검은 유리 */
 .hero .pill--ghost { background: rgb(10 10 10 / .07); color: hsl(var(--ink)); }
 @media (hover: hover) and (pointer: fine) { .hero .pill--ghost:hover { background: rgb(10 10 10 / .12); } }
+
+/* ── 테이블 오더 페이지 첫 화면 ─────────────────────────── */
+.to-hero {
+  min-height: 100vh; min-height: 100dvh; display: grid; align-items: center; padding: 120px 0 64px; overflow: clip;
+  background: radial-gradient(55% 60% at 78% 50%, rgb(var(--accent-rgb) / .09), transparent 70%), var(--bg);
+}
+.to-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.to-hero__title { margin-top: 22px; font-size: clamp(2.6rem, 5.2vw, 5rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.05em; }
+.to-hero__title em { color: var(--accent); }
+.to-hero__card .cardbox { transform: perspective(1200px) rotateX(14deg) rotateY(-16deg) rotate(-5deg); }
+.works--first { margin-top: 0; }
 
 /* ── 하는 일 ─────────────────────────── */
 .services { padding: var(--section) 0; }
@@ -560,7 +593,13 @@ em { font-style: normal; }
 /* ── 좁은 화면 ─────────────────────────── */
 @media (max-width: 1080px) {
   .nav__links { display: none; }
-  .nav .pill { margin-left: auto; }
+  .nav__product { margin-left: auto; display: flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 10px; }
+  .nav__product span { display: none; }
+  .nav__product b { font-size: .9rem; }
+  .nav .pill { margin-left: 0; height: 40px; padding: 0 16px; font-size: .9rem; }
+  .nav:not(:has(.nav__product)) .pill { margin-left: auto; }
+  .to-hero__grid { grid-template-columns: minmax(0, 1fr); }
+  .to-hero__card { max-width: 520px; width: 100%; margin: 0 auto; }
   .hero__base { grid-template-columns: minmax(0, 1fr); }
   .wordmark { font-size: calc((100vw - 2 * var(--gutter)) / 5.5); }
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -590,6 +629,9 @@ em { font-style: normal; }
   .bento .svc:not(.bento__big) { min-height: 220px; }
 }
 @media (max-width: 560px) {
+  .nav { gap: 10px; }
+  .nav__product { padding: 0 12px; }
+  .nav .pill { padding: 0 14px; }
   .nav { height: 54px; top: 10px; padding-left: 18px; }
   .reel { height: clamp(260px, 44vh, 380px); }
   .reel__item { width: 168px; }

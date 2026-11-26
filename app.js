@@ -234,7 +234,7 @@
   }
 
   // ── 사이드바: 지금 보고 있는 구역의 메뉴를 표시
-  const navLinks = [...document.querySelectorAll('.nav__links a')];
+  const navLinks = [...document.querySelectorAll('.nav__links a[href^="#"]')];
   const targets = navLinks.map((a) => document.querySelector(a.getAttribute('href')));
   const markHere = () => {
     const y = innerHeight * 0.4;
@@ -245,14 +245,16 @@
   addEventListener('scroll', markHere, { passive: true }); markHere();
 
   // ── 시그니처: 한 번의 주문 (스크롤로 진행)
+  // 테이블 오더 페이지에만 있다. 없으면 메뉴 상태만 갱신한다
   const story = $('.story');
   const stage = $('#story');
-  const steps = $$('.steps span', stage);
+  const steps = stage ? $$('.steps span', stage) : [];
   const set = (k, v) => stage.style.setProperty(k, v);
   let target = 0, smooth = 0, init = false, pending = false;
 
   function frame() {
     pending = false;
+    if (!story || !stage) { onNav(); return; }
     const range = Math.max(1, story.offsetHeight - innerHeight);
     target = clamp(-story.getBoundingClientRect().top / range);
     smooth = (!init || reduce.matches) ? target : lerp(smooth, target, 0.14);
@@ -293,7 +295,7 @@
   tick();
 
   // 컨테이너 단위를 못 쓰는 브라우저용 보드 크기
-  if (!(window.CSS && CSS.supports('width', '1cqw'))) {
+  if (stage && !(window.CSS && CSS.supports('width', '1cqw'))) {
     const wrap = $('.board-wrap'), board = $('.board');
     const fit = () => board.style.setProperty('--k', (wrap.clientWidth / 720).toFixed(4));
     addEventListener('resize', fit); fit();
