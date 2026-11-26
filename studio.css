@@ -212,35 +212,41 @@ body[data-page="about"] #stage, body[data-page="sono"] #stage { pointer-events: 
 
 /* 그리드 반응형 / 휴대폰 */
 @media (max-width: 767px) {
+  /* 휴대폰: 데스크톱과 같은 구성을 좁은 화면에 그대로 옮긴다.
+     가운데 타일 줄, 왼쪽 작업 목록, 오른쪽 위 소개 글, 오른쪽 가운데 정보, 아래 보기 버튼 */
   html { font-size: 2.5641vw; }
-  :root { --t: 1.3rem; --sym-w: 15rem; }
-  #hd-title .wm { font-size: 2.2rem; letter-spacing: -0.04em; }
+  :root { --t: 1.3rem; --sym-w: 15rem; --side: 10.4rem; }
+  /* 상단: 왼쪽 로고, 오른쪽 칸에 메뉴·상담, 그 아래 시계 */
+  #hd-title .wm { font-size: 1.9rem; letter-spacing: -0.04em; }
   .is-shrink #hd-title, #hd-title { transform: none; }
-  #hd-right { gap: 0; flex: 1; justify-content: flex-end; }
+  #hd-right { display: grid; grid-template-columns: 1fr auto; gap: .2rem 0; width: var(--side); }
   #hd-right > * { width: auto; }
-  #hd-menu { margin-right: auto; margin-left: 4.5rem; }
-  #hd-time { display: none; }
-  #hd, #fix { font-size: 1.5rem; }
-  #fix, #ti-v, #ti-h, #me-h, #big { display: none !important; }
-  #me-v { left: var(--g); right: var(--g); width: auto; top: auto; bottom: 4.2rem; transform: none; }
-  #me-v .me-row { justify-content: space-between; }
-  #me-v .me-row > .nm { display: block; }
-  #me-v .me-row > span:nth-child(2), #me-v .me-row > span:nth-child(3) { display: none; }
-  #me-v .me-row > span:nth-child(4) { width: auto; }
-  /* 위쪽 띠: 어느 화면에서든 로고·메뉴가 아래로 지나가는 사진이나 글과 겹치지 않게 한다 */
-  body::before { content: ""; position: fixed; left: 0; right: 0; top: 0; height: 4.8rem; z-index: 45; background: var(--concrete); border-bottom: 1px solid rgb(0 0 0 / .1); pointer-events: none; }
-  /* 아래쪽 띠: 줄 보기에서 정보 줄과 보기 버튼이 타일 사진과 겹치지 않게 한다 */
-  body[data-page="work"]:not([data-view="g"])::after { content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 7.4rem; z-index: 15; background: var(--concrete); border-top: 1px solid rgb(0 0 0 / .1); pointer-events: none; }
-  body[data-page="about"] #cp { display: none; }
-  #about .ab-info dt { width: 9.5rem; }
-  /* 그리드 보기: 띠가 없으니 글자 뒤에만 배경을 깐다 */
-  body[data-view="g"] #modes, body[data-view="g"] #cp { background: rgb(233 231 227 / .94); box-shadow: 0 0 0 .4rem rgb(233 231 227 / .94); }
-  #me-g { top: auto; bottom: 4.2rem; transform: none; }
+  #hd-time { grid-column: 1 / -1; grid-row: 2; }
+  /* 오른쪽 위 소개 글 */
+  #fix { top: 6.6rem; right: var(--g); width: var(--side); font-size: 1.2rem; }
+  body[data-view="g"] #fix { opacity: 0; pointer-events: none; }
+  #big { display: none !important; }
+  /* 세로 보기: 왼쪽 목록, 오른쪽 가운데에 번호·분야·맡은 일 */
+  #ti-v { left: var(--g); width: 8.2rem; height: 21rem; }
+  #me-v { left: auto; right: var(--g); width: 8.2rem; height: calc(7em * var(--lh)); transform: translateY(calc(-.5em * var(--lh))); }
+  #me-v .me-row { flex-direction: column; align-items: flex-end; justify-content: flex-start; text-align: right; }
+  #me-v .me-row > span:nth-child(2), #me-v .me-row > span:nth-child(3) { width: auto; color: var(--grey); }
+  #me-v .me-row > span:nth-child(4) { order: -1; width: auto; }
+  /* 가로 보기: 오른쪽 아래 목록과 정보 줄 */
+  #ti-h { right: 10rem; width: 10.6rem; }
+  #me-h { width: 31rem; }
+  /* 그리드 보기: 가운데 줄에 이름과 번호 */
   #me-g > div:nth-child(2), #me-g > div:nth-child(3) { display: none; }
   #me-g > div:nth-child(1) { width: auto; flex: 1; }
-  body[data-view="h"] #me-v { visibility: visible; opacity: 1; }
+  body[data-view="g"] #modes, body[data-view="g"] #cp { background: rgb(233 231 227 / .94); box-shadow: 0 0 0 .4rem rgb(233 231 227 / .94); }
+  /* 소개·상세처럼 글이 위로 지나가는 화면에서만 상단 뒤에 띠를 깐다 */
+  body:not([data-page="work"])::before { content: ""; position: fixed; left: 0; right: 0; top: 0; height: 5.8rem; z-index: 45; background: var(--concrete); border-bottom: 1px solid rgb(0 0 0 / .1); pointer-events: none; }
+  body[data-page="about"] #cp, body[data-page="about"] #fix { display: none; }
+  #about .ab-info dt { width: 9.5rem; }
   #modes, #cp { font-size: 1.3rem; }
 }
+/* 세로가 짧은 휴대폰에서는 소개 글이 가운데 정보와 닿으므로 숨긴다 */
+@media (max-width: 767px) and (max-height: 720px) { #fix { display: none; } }
 
 /* ── 스튜디오 소개 ─────────────────────────── */
 #about { position: fixed; inset: 0; z-index: 20; overflow-y: auto; overflow-x: hidden; visibility: hidden; opacity: 0; transition: opacity .5s, visibility 0s .5s; overscroll-behavior: contain; }

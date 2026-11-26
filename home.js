@@ -18,7 +18,7 @@
 
   // ── 작업물 데이터 (실제 작업물 3개)
   const P = [
-    { id: 'to', no: '01', name: '오더담 테이블 오더', tags: '외식, 주문·결제', svc: '기획, 디자인, 웹·앱 개발, 운영', href: 'table-order.html' },
+    { id: 'to', no: '01', name: '오더담 테이블 오더', sn: '테이블 오더', tags: '외식, 주문·결제', svc: '기획, 디자인, 웹·앱 개발, 운영', href: 'table-order.html' },
     { id: 'sono', no: '02', name: 'SONO', tags: '웹소설, 글쓰기 도구', svc: '기획, 디자인, 웹 개발, 운영', href: '#sono' },
     { id: 'paws', no: '03', name: '포우즈 Paws', tags: '반려동물, 장소 찾기', svc: '기획, 디자인, 웹 개발', href: 'https://paws-neighborhood-life.hskim3514253.chatgpt.site', ext: true },
   ];
@@ -61,7 +61,7 @@
   function measure() {
     rem = parseFloat(getComputedStyle(html).fontSize);
     vw = innerWidth; vh = innerHeight; mobile = vw < 768;
-    TW = mobile ? 22 * rem : 18.4 * rem;
+    TW = mobile ? 15 * rem : 18.4 * rem;   // 휴대폰: 양옆에 목록과 정보가 들어갈 자리를 남긴다
     GAP = .5 * rem;
     symW = (mobile ? 15 : 16) * rem;
     D = TW * (mobile ? 1.03 : 1.076) / 2 + (mobile ? 1.2 : 8.1) * rem;   // 세로 보기에서 심벌 두 조각이 벌어지는 거리
@@ -181,7 +181,7 @@
       cont.innerHTML = '';
       for (let c = 0; c < 3; c++) STRIP.forEach(([pi], i) => {
         const p = P[pi], a = document.createElement('a');
-        a.href = p.href; a.textContent = p.name; a.dataset.i = i;
+        a.href = p.href; a.textContent = cont === tiV && innerWidth < 768 && p.sn ? p.sn : p.name; a.dataset.i = i;   // 휴대폰 왼쪽 목록은 좁아서 짧은 이름을 쓴다
         if (p.ext) { a.target = '_blank'; a.rel = 'noopener'; }
         const isFirst = c === 1 && STRIP.findIndex((s) => s[0] === pi) === i;
         if (!(focusable && isFirst)) { a.tabIndex = -1; a.setAttribute('aria-hidden', 'true'); }
