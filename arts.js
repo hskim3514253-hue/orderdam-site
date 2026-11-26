@@ -60,7 +60,10 @@
   function paint(root) {
     (root || document).querySelectorAll('.card[data-shop]:empty').forEach((el) => window.ODCards && ODCards.render(el, el.dataset.shop, seed += 4));
   }
-  function art(name) { return (ARTS[name] || (() => ''))(); }
+  function art(name) {
+    if (name.startsWith('photo:')) { const [, id, pos] = name.split(':'); return `<img class="bw" src="assets/photos/photo-${id}-500.jpg" alt="" loading="lazy" decoding="async" style="object-position:${pos || '50% 50%'}">`; }
+    return (ARTS[name] || (() => ''))();
+  }
   function fill(root) {
     (root || document).querySelectorAll('[data-art]').forEach((el) => { if (!el.dataset.filled) { el.innerHTML = art(el.dataset.art); el.dataset.filled = '1'; } });
     paint(root);

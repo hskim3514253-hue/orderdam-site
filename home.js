@@ -23,16 +23,20 @@
     { id: 'paws', no: '03', name: '포우즈 Paws', tags: '반려동물, 장소 찾기', svc: '기획, 디자인, 웹 개발', href: 'https://paws-neighborhood-life.hskim3514253.chatgpt.site', ext: true },
   ];
   // 줄에 놓이는 순서: 작업물 1·2·3이 네 번 반복되고, 매번 다른 그림을 쓴다. [작업물, 그림, 가로세로비]
+  // 흑백 사진(photo:파일번호:위치)은 각 작업의 분위기를 보여 주는 사진이다 — 작업물 수는 그대로 3개
   const STRIP = [
-    [0, 'card-youth', 1.25], [1, 'sono-notes', .82], [2, 'paws-m', .7],
-    [0, 'phone-menu', .8], [1, 'sono-graph', 1.2], [2, 'paws-d', 1.6],
-    [0, 'owner', 1.3], [1, 'sono-type', 1.5], [2, 'paws-m2', .95],
-    [0, 'card-sea', 1.72], [1, 'sono-world', 1], [2, 'paws-d2', .9],
+    [0, 'card-youth', 1.25], [1, 'photo:d183:50% 50%', 1.3], [2, 'paws-m', .7],
+    [0, 'photo:c141:35% 55%', .8], [1, 'sono-notes', .82], [2, 'photo:767:50% 50%', 1.5],
+    [0, 'phone-menu', .8], [1, 'photo:c822:30% 50%', 1], [2, 'photo:190:50% 50%', .75],
+    [0, 'photo:c167:62% 55%', 1.4], [1, 'sono-graph', 1.2], [2, 'paws-d', 1.6],
+    [0, 'photo:m61714648:60% 70%', .7], [1, 'photo:d204:50% 50%', 1.25], [2, 'photo:606:50% 60%', 1],
+    [0, 'owner', 1.3], [1, 'photo:c877:50% 50%', .85], [2, 'photo:317:50% 50%', 1.45],
+    [0, 'photo:m61715560:70% 60%', 1], [1, 'sono-type', 1.5],
   ];
   const N = STRIP.length;
   // 그리드 자리 [줄, 칸] — 가운데 심벌 자리는 비운다
-  const CELLS_D = [[0, 1], [0, 4], [0, 8], [0, 10], [1, 0], [1, 3], [1, 8], [1, 11], [2, 2], [2, 5], [2, 7], [2, 10]];
-  const CELLS_M = [[0, 0], [0, 1], [0, 2], [0, 3], [1, 0], [1, 3], [2, 0], [2, 3], [3, 0], [3, 1], [3, 2], [3, 3]];
+  const CELLS_D = [[0, 0], [0, 2], [0, 4], [0, 7], [0, 9], [0, 11], [1, 1], [1, 3], [1, 8], [1, 10], [2, 0], [2, 2], [2, 9], [2, 11], [3, 1], [3, 3], [3, 5], [3, 6], [3, 8], [3, 10]];
+  const CELLS_M = [[0, 0], [0, 1], [0, 2], [0, 3], [1, 0], [1, 1], [1, 2], [1, 3], [2, 0], [2, 3], [3, 0], [3, 3], [4, 0], [4, 1], [4, 2], [4, 3], [5, 0], [5, 1], [5, 2], [5, 3]];
 
   const stage = $('#stage');
   const tiles = STRIP.map(([pi, art, ar], i) => {
@@ -72,7 +76,7 @@
     L = acc + tiles[N - 1].h / 2 + GAP + tiles[0].h / 2;
     const cols = mobile ? 4 : 12;
     colW = (vw - 2 * rem - (cols - 1) * rem) / cols;
-    gridGap = (mobile ? 3 : 8) * rem;
+    gridGap = (mobile ? 2.2 : 5.5) * rem;
   }
   const wrap = (v) => { v = ((v % L) + L) % L; return v > L / 2 ? v - L : v; };
 
@@ -93,7 +97,7 @@
     const near = clamp(1 - Math.abs(a) / (t.h * .9));
     const s = 1 + (mobile ? .03 : .076) * near;
     // 가로로 누운 만큼, 가운데 타일 양옆을 벌려 심벌 두 조각이 들어갈 자리를 만든다
-    const need = D + symW / 2 + 2.6 * rem - (act.h * (1 + (mobile ? .03 : .076))) / 2 - GAP;
+    const need = D + symW * .27 + 2.6 * rem - (act.h * (1 + (mobile ? .03 : .076))) / 2 - GAP;
     const E = Math.max(0, need) * clamp(-th / 90);
     const push = E * clamp(Math.abs(a) / (act.h / 2 + GAP)) * Math.sign(a);
     let aa = a + push;
@@ -107,7 +111,7 @@
   function gridPose(i) {
     const t = tiles[i];
     const [row, col] = (mobile ? CELLS_M : CELLS_D)[i];
-    const rows = mobile ? 4 : 3;
+    const rows = mobile ? 6 : 4;
     const gs = colW / TW;
     const rowH = Math.max(...tiles.map((x) => x.h)) * gs * .78;
     const total = rows * rowH + (rows - 1) * gridGap;
@@ -163,7 +167,8 @@
   let lastSpread = null;
   function updateSpread() {
     let sp = 0;
-    if (page === 'work' && ready) sp = view === 'g' ? (hovered >= 0 ? D : 0) : D;
+    const open = Math.max(0, D - symW * .23);
+    if (page === 'work' && ready) sp = view === 'g' ? (hovered >= 0 ? open : 0) : open;
     // 심벌은 SVG라 이동 거리를 그림 단위(가로 100)로 바꿔 준다
     if (sp !== lastSpread) { $('#sym').style.setProperty('--spread', `${(sp / (symW / 100)).toFixed(3)}px`); lastSpread = sp; }
   }
