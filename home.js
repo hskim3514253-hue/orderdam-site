@@ -25,13 +25,13 @@
   // 줄에 놓이는 순서: 작업물 1·2·3이 네 번 반복되고, 매번 다른 그림을 쓴다. [작업물, 그림, 가로세로비]
   // 흑백 사진(photo:파일번호:위치)은 각 작업의 분위기를 보여 주는 사진이다 — 작업물 수는 그대로 3개
   const STRIP = [
-    [0, 'card-youth', 1.25], [1, 'photo:d183:50% 50%', 1.3], [2, 'paws-m', .7],
+    [0, 'nfc-cafe', 1.59], [1, 'photo:d183:50% 50%', 1.3], [2, 'paws-m', .7],
     [0, 'photo:c141:35% 55%', .8], [1, 'sono-notes', .82], [2, 'photo:767:50% 50%', 1.5],
     [0, 'phone-menu', .8], [1, 'photo:c822:30% 50%', 1], [2, 'photo:190:50% 50%', .75],
     [0, 'photo:c167:62% 55%', 1.4], [1, 'sono-graph', 1.2], [2, 'paws-d', 1.6],
     [0, 'photo:m61714648:60% 70%', .7], [1, 'photo:d204:50% 50%', 1.25], [2, 'photo:606:50% 60%', 1],
     [0, 'owner', 1.3], [1, 'photo:c877:50% 50%', .85], [2, 'photo:317:50% 50%', 1.45],
-    [0, 'photo:m61715560:70% 60%', 1], [1, 'sono-type', 1.5],
+    [0, 'nfc-thinker', 1.5], [1, 'sono-type', 1.5],
   ];
   const N = STRIP.length;
   // 그리드 자리 [줄, 칸] — 가운데 심벌 자리는 비운다
@@ -377,7 +377,7 @@
 
   // ── 소개 화면: 스크롤하면 심벌이 커지고 그 안에서 일하는 방식 다섯 단계가 바뀐다
   const about = $('#about');
-  const STEP_ART = ['sono-notes', 'card-youth', 'owner', 'phone-menu', 'paws-d'];
+  const STEP_ART = ['sono-notes', 'nfc-cafe', 'owner', 'phone-menu', 'paws-d'];
   const stepBtns = $$('.ab-steps button'), stepTxt = $$('.ab-step-text p');
   let step = -1;
   function setStep(k) {
@@ -581,7 +581,7 @@
     at(600, () => { sym.style.transition = 'opacity .3s, width 2.1s cubic-bezier(.19, 1, .22, 1)'; sym.style.opacity = '1'; sym.classList.remove('no-t'); requestAnimationFrame(() => sym.style.setProperty('--sym-w', `${symW}px`)); });
     at(2500, () => sym.classList.add('has-dot'));
     at(3100, () => count.classList.add('is-off'));
-    const arts = ['card-youth', 'sono-graph', 'paws-m', 'phone-menu'];
+    const arts = ['nfc-cafe', 'sono-graph', 'paws-m', 'phone-menu'];
     const ws = symW * .68, hs = symW * .56;
     at(3200, () => { sym.classList.remove('has-dot'); showWin(arts[0], ws, hs); });
     [1, 2, 3].forEach((k) => at(3200 + k * 620, () => { winIn.innerHTML = `<div class="tile-art" style="container-type:size">${ODArt.art(arts[k])}</div>`; ODArt.paint(winIn); }));

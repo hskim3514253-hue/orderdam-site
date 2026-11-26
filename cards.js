@@ -23,65 +23,6 @@
   function rand(seed) { let s = seed; return () => (s = (s * 9301 + 49297) % 233280) / 233280; }
 
   const SCENES = {
-    youth() {
-      // 청음 카페 유스레코드: 크림 종이 위에 LP 한 장과 톤암, 아래는 원목 선반.
-      // 가운데 NFC 자리가 레코드 라벨이 된다 (카드 격자 가운데 칸의 중심 x≈82)
-      const id = 'yr' + uid++, r = rand(13);
-      const cx = 82, cy = 47, R = 41;
-      let grooves = '';
-      for (let i = 0; i < 26; i++) {
-        const rr = 15 + i * 1.02 + r() * 0.3;
-        grooves += `<circle cx="${cx}" cy="${cy}" r="${rr.toFixed(2)}" fill="none" stroke="${i % 5 === 4 ? '#3a322b' : '#241e19'}" stroke-width="${(0.18 + r() * 0.12).toFixed(2)}" opacity="${(0.55 + r() * 0.4).toFixed(2)}"/>`;
-      }
-      let grain = '';
-      for (let i = 0; i < 9; i++) {
-        const y = 89 + i * 1.25 + r() * 0.5;
-        grain += `<path d="M0 ${y.toFixed(2)} C${(40 + r() * 20).toFixed(1)} ${(y + r() - .5).toFixed(2)} ${(100 + r() * 20).toFixed(1)} ${(y + r() - .5).toFixed(2)} ${W} ${(y + r() * .6).toFixed(2)}" fill="none" stroke="#3b2416" stroke-width=".22" opacity="${(0.25 + r() * 0.3).toFixed(2)}"/>`;
-      }
-      let specks = '';
-      for (let i = 0; i < 60; i++) specks += `<circle cx="${(r() * W).toFixed(1)}" cy="${(r() * 86).toFixed(1)}" r="${(r() * 0.28 + 0.08).toFixed(2)}" fill="#8a6a4a" opacity="${(r() * 0.25 + 0.08).toFixed(2)}"/>`;
-      return `<svg class="scene" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <linearGradient id="${id}p" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf6ec"/><stop offset="1" stop-color="#efe3cf"/></linearGradient>
-          <radialGradient id="${id}l" cx=".86" cy=".12" r=".7"><stop offset="0" stop-color="#fff6dc" stop-opacity=".9"/><stop offset="1" stop-color="#fff6dc" stop-opacity="0"/></radialGradient>
-          <radialGradient id="${id}v" cx=".5" cy=".5" r=".5"><stop offset=".3" stop-color="#1d1915"/><stop offset=".97" stop-color="#110e0c"/><stop offset="1" stop-color="#2a241f"/></radialGradient>
-          <linearGradient id="${id}s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".46" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".16"/><stop offset=".54" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-          <linearGradient id="${id}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a38"/><stop offset=".12" stop-color="#6e4329"/><stop offset="1" stop-color="#4e2e1b"/></linearGradient>
-          <filter id="${id}d" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx=".6" dy="1.6" stdDeviation="1.6" flood-color="#3b2416" flood-opacity=".35"/></filter>
-        </defs>
-        <rect width="${W}" height="${H}" fill="url(#${id}p)"/>
-        <rect width="${W}" height="${H}" fill="url(#${id}l)"/>
-        ${specks}
-        <!-- 레코드 재킷: 레코드 뒤로 살짝 보이는 테라코타 재킷 -->
-        <g filter="url(#${id}d)">
-          <rect x="22" y="9" width="66" height="66" rx="1.2" fill="#b9573a"/>
-          <circle cx="34" cy="21" r="7" fill="#f3e6cf" opacity=".9"/>
-          <path d="M22 60 L88 44" stroke="#f3e6cf" stroke-width=".7" opacity=".55"/>
-          <path d="M22 64 L88 48" stroke="#f3e6cf" stroke-width=".35" opacity=".4"/>
-        </g>
-        <!-- LP -->
-        <g filter="url(#${id}d)">
-          <circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#${id}v)"/>
-          ${grooves}
-          <circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#${id}s)"/>
-          <circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#${id}s)" transform="rotate(90 ${cx} ${cy})" opacity=".6"/>
-          <circle cx="${cx}" cy="${cy}" r="${R - 0.3}" fill="none" stroke="#4a4038" stroke-width=".35"/>
-        </g>
-        <!-- 톤암 -->
-        <g>
-          <circle cx="146" cy="13" r="6" fill="#e9dcc6" stroke="#b9a68a" stroke-width=".5"/>
-          <circle cx="146" cy="13" r="2.6" fill="#a8916f"/>
-          <path d="M146 13 L131 44 L118 52" fill="none" stroke="#cbbba2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M146 13 L131 44 L118 52" fill="none" stroke="#f6eedf" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
-          <rect x="113.6" y="50.2" width="6.5" height="3.4" rx=".6" fill="#3a2f27" transform="rotate(-32 116.8 51.9)"/>
-          <rect x="150" y="9" width="5" height="8" rx="1" fill="#5a4a3c"/>
-        </g>
-        <!-- 원목 선반 -->
-        <rect x="0" y="87" width="${W}" height="13" fill="url(#${id}w)"/>
-        <rect x="0" y="87" width="${W}" height=".7" fill="#b07c52" opacity=".9"/>
-        ${grain}
-      </svg>`;
-    },
     sea() {
       const id = 'sea' + uid++, r = rand(5);
       let stars = '';
@@ -178,7 +119,6 @@
   const SHOPS = {
     sea:   { cls: 'shop-sea',   ko: '밤바다', en: 'HIGHBALL BAR BAMBADA', table: 'SEAT 07' },
     slow:  { cls: 'shop-slow',  ko: '느린오후', en: 'SLOW AFTERNOON COFFEE', table: 'TABLE 03' },
-    youth: { cls: 'shop-youth', ko: '유스레코드', en: 'COFFEE & RECORDS', table: 'TABLE 04' },
     sobok: { cls: 'shop-sobok', ko: '소복', en: 'SOBOK BAKERY', table: 'TABLE 01' },
   };
   const PHONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg>';

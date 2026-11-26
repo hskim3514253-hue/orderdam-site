@@ -302,7 +302,7 @@ body[data-page="about"] #about { visibility: visible; opacity: 1; transition: op
 @keyframes ring { 0% { opacity: .9; transform: translate(-50%, -50%) scale(.6); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(2.4); } }
 .pn .duo { width: 86%; display: grid; grid-template-columns: 1fr 1fr; gap: 6%; }
 .pn .duo .ph { width: 100%; }
-.pn .deck { position: relative; width: 82%; aspect-ratio: 1 / .82; }
+.pn .deck { position: relative; width: 82%; aspect-ratio: 1 / .62; }
 .pn .deck .cardbox { position: absolute; width: 74%; }
 .pn .deck .d1 { left: 0; top: 0; transform: rotate(-5deg); }
 .pn .deck .d2 { right: 0; top: 26%; transform: rotate(4deg); }
@@ -396,18 +396,6 @@ body[data-page="about"] #about { visibility: visible; opacity: 1; transition: op
 .shop-sea .brand { justify-content: flex-end; gap: 1em; }
 .shop-slow { --qr-ink: #4a2414; --brand: #fff3e2; }
 .shop-slow .name { font-family: "Gowun Batang", serif; font-weight: 700; }
-/* 유스레코드: 크림 종이, LP, 원목. 글자는 짙은 갈색, NFC 자리는 레코드 라벨 */
-.shop-youth { --qr-ink: #30271f; --brand: #30271f; }
-.shop-youth .name { font-family: "Gowun Batang", "Noto Serif KR", serif; font-weight: 700; font-size: 2.2em; letter-spacing: -0.02em; text-shadow: none; }
-.shop-youth .name small { color: #7a4a30; letter-spacing: .18em; }
-.shop-youth .brand { justify-content: flex-end; gap: 1.5em; padding-bottom: .9em; }
-.shop-youth .tbl { color: #f3e6cf; opacity: .92; }
-.card--quiet.shop-youth .brand { padding-bottom: 2.7em; }
-.shop-youth .glass { background: rgb(255 252 245 / .9); border-color: rgb(89 60 44 / .25); box-shadow: 0 .3em .9em rgb(59 36 22 / .18); }
-.shop-youth .lbl { color: #fbf3e4; background: rgb(48 39 31 / .82); }
-.shop-youth .nfc { color: #fbf3e4; background: radial-gradient(circle, #c9653f 0 58%, #a94c2e 59% 100%); border-color: #f3e6cf; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: inset 0 0 0 .25em rgb(255 240 220 / .18); }
-.shop-youth .nfc::before { border-color: rgb(243 230 207 / .35); }
-.shop-youth .nfc::after { border-color: rgb(243 230 207 / .16); }
 .shop-sobok { --qr-ink: #24412f; --brand: #2c4a36; }
 .shop-sobok .name { font-family: var(--sans); font-weight: 900; letter-spacing: -0.03em; text-shadow: none; }
 .shop-sobok .lbl { color: #2c4a36; background: rgb(255 255 255 / .8); }
@@ -450,3 +438,8 @@ body[data-page="detail"] { overflow-x: clip; }
 
 /* 분위기 사진은 흑백으로 */
 img.bw { filter: grayscale(1) contrast(1.06); }
+
+/* 상세의 사진 패널: 사진 비율 그대로 */
+.pn--photo { aspect-ratio: 1581 / 995; background: #111; }
+.pn--thinker { aspect-ratio: 1536 / 1024; }
+.pn-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }

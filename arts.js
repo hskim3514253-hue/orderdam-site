@@ -4,7 +4,7 @@
 (() => {
   const PHONE_MENU = `
     <div class="ph"><div class="ph__in"><div class="ph__s">
-      <p class="ph__shop">유스레코드</p><p class="ph__tbl">TABLE 04</p>
+      <p class="ph__shop">Cafe</p><p class="ph__tbl">TABLE 04</p>
       <div class="ph__item"><b>아인슈페너</b><span>5,800원</span><em>2</em></div>
       <div class="ph__item"><b>바닐라라떼</b><span>5,800원</span><em>1</em></div>
       <div class="ph__item"><b>바스크치즈케이크</b><span>5,500원</span></div>
@@ -12,7 +12,7 @@
     </div></div></div>`;
   const PHONE_PAID = `
     <div class="ph"><div class="ph__in"><div class="ph__s">
-      <p class="ph__shop">유스레코드</p><p class="ph__tbl">TABLE 04</p>
+      <p class="ph__shop">Cafe</p><p class="ph__tbl">TABLE 04</p>
       <div class="ph__ok"><i></i><b>결제 완료</b><span>사장님께 주문이 전달됐어요</span></div>
       <div class="ph__item"><b>아인슈페너 × 2</b><span>바닐라라떼 × 1</span></div>
     </div></div></div>`;
@@ -36,7 +36,8 @@
   const NOTES = (title) => `<div class="so"><b>${title}</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>`;
 
   const ARTS = {
-    'card-youth': () => `<div class="art art--cream">${card('youth')}</div>`,
+    'nfc-cafe': () => `<img src="assets/work/nfc-cafe-600.jpg" alt="" loading="lazy" decoding="async">`,
+    'nfc-thinker': () => `<img src="assets/work/nfc-thinker-600.jpg" alt="" loading="lazy" decoding="async" style="object-position:60% 50%">`,
     'card-sea': () => `<div class="art art--bleed">${card('sea', true)}</div>`,
     'card-sobok': () => `<div class="art art--stone">${card('sobok', true)}</div>`,
     'phone-menu': () => `<div class="art art--stone">${PHONE_MENU}</div>`,
@@ -51,9 +52,10 @@
     'paws-d': () => `<img src="assets/work/paws-desktop.jpg" alt="" style="object-position:50% 0">`,
     'paws-d2': () => `<img src="assets/work/paws-desktop.jpg" alt="" style="object-position:86% 34%">`,
     // 상세 패널용 큰 장면
-    'tap': () => `<div class="tap">${card('youth')}<span class="ripple-ring"></span><span class="ripple-ring"></span>${PHONE_MENU.replace('class="ph"', 'class="ph" style="opacity:.96"')}</div>`,
+    'tap': () => `<img class="pn-img" src="assets/work/nfc-cafe.jpg" alt="" decoding="async">`,
+    'thinker': () => `<img class="pn-img" src="assets/work/nfc-thinker.jpg" alt="" loading="lazy" decoding="async">`,
     'flow': () => `<div class="duo">${PHONE_MENU}${PHONE_PAID}</div>`,
-    'deck': () => `<div class="deck"><div class="cardbox d1"><div class="card card--quiet" data-shop="sea"></div></div><div class="cardbox d2"><div class="card card--quiet" data-shop="sobok"></div></div><div class="cardbox d3"><div class="card" data-shop="youth"></div></div></div>`,
+    'deck': () => `<div class="deck"><div class="cardbox d1"><div class="card card--quiet" data-shop="sea"></div></div><div class="cardbox d2"><div class="card card--quiet" data-shop="sobok"></div></div></div>`,
     'board': () => BOARD,
   };
   let seed = 31;
