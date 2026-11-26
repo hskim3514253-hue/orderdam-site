@@ -153,50 +153,12 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const smoothstep = (a, b, v) => { const x = clamp((v - a) / (b - a)); return x * x * (3 - 2 * x); };
   const lerp = (a, b, t) => a + (b - a) * t;
 
   // 모든 카드 그리기
   $$('.card[data-shop]').forEach((el, i) => render(el, el.dataset.shop, 7 + i * 4));
-
-  // ── 첫 화면: 가게 바꾸기
-  const hero = $('.hero');
-  const heroCard = $('#heroCard');
-  const live = $('#shopLive');
-  hero.dataset.shop = heroCard.dataset.shop;
-  $$('.chip').forEach((chip) => chip.addEventListener('click', () => {
-    const key = chip.dataset.shop;
-    if (key === heroCard.dataset.shop) return;
-    $$('.chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-    heroCard.dataset.shop = key; hero.dataset.shop = key;
-    render(heroCard, key, 9);
-    if (live) live.textContent = SHOPS[key].ko + ' 카드를 보고 있어요';
-    if (!reduce.matches) { heroCard.classList.remove('is-swapping'); void heroCard.offsetWidth; heroCard.classList.add('is-swapping'); }
-  }));
-
-  // ── 첫 화면: 카드가 커서를 따라 기울어짐
-  const tilt = $('#tilt');
-  if (!reduce.matches) {
-    tilt.classList.add('is-entering');
-    heroCard.addEventListener('animationend', (e) => { if (e.animationName === 'land') tilt.classList.remove('is-entering'); });
-  }
-  if (finePointer.matches && !reduce.matches) {
-    let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
-    const loop = () => {
-      x = lerp(x, tx, 0.12); y = lerp(y, ty, 0.12);
-      tilt.style.setProperty('--rx', x.toFixed(4)); tilt.style.setProperty('--ry', y.toFixed(4));
-      raf = (Math.abs(tx - x) > 0.0005 || Math.abs(ty - y) > 0.0005) ? requestAnimationFrame(loop) : 0;
-    };
-    hero.addEventListener('pointermove', (e) => {
-      const r = tilt.getBoundingClientRect();
-      tx = clamp((e.clientX - (r.left + r.width / 2)) / innerWidth, -0.5, 0.5);
-      ty = clamp((e.clientY - (r.top + r.height / 2)) / innerHeight, -0.5, 0.5);
-      if (!raf) raf = requestAnimationFrame(loop);
-    }, { passive: true });
-    hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(loop); });
-  }
 
   // ── 등장: 끝나면 transform을 풀고, 애니메이션이 안 돌면 바로 보이게
   const appearEls = $$('.appear');

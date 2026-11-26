@@ -33,67 +33,83 @@
   </header>
 
   <main id="main">
-    <!-- 첫 화면 -->
+    <!-- 첫 화면: 회사 소개 + 하는 일 세 가지 -->
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero__light" aria-hidden="true"></div>
-      <div class="hero__table" aria-hidden="true"></div>
 
-      <div class="hero__copy">
-        <p class="eyebrow appear appear--soft" style="--d:.22s"><i class="dot"></i>QR · NFC 테이블 주문</p>
-        <h1 id="hero-title" class="hero__title">
-          <span class="line appear appear--mask" style="--d:.38s">카드 한 장이면</span>
-          <span class="line appear appear--mask" style="--d:.52s">주문도 결제도</span>
-          <span class="line appear appear--mask" style="--d:.66s"><em>끝.</em></span>
-        </h1>
-        <p class="hero__lede appear appear--soft" style="--d:.82s">손님은 QR을 찍거나 휴대폰을 대기만 하면 돼요. 앱 설치 없이 결제까지 끝나고, 사장님 화면에는 결제된 주문만 들어옵니다.</p>
-        <div class="hero__actions">
-          <a class="pill pill--solid appear appear--btn" style="--d:.96s" href="tel:01092845963">시범 매장 신청 <span class="pill__arrow" aria-hidden="true">→</span></a>
-          <a class="pill pill--ghost appear appear--side" style="--d:1.08s" href="#flow">작동 방식 보기</a>
+      <div class="hero__head">
+        <div>
+          <p class="eyebrow appear appear--soft" style="--d:.2s"><i class="dot"></i>소프트웨어 개발 및 공급</p>
+          <h1 id="hero-title" class="hero__title">
+            <span class="line appear appear--mask" style="--d:.34s">웹과 앱을 만들어</span>
+            <span class="line appear appear--mask" style="--d:.48s">공급합니다, <em>오더담.</em></span>
+          </h1>
+        </div>
+        <div class="hero__side">
+          <p class="hero__lede appear appear--soft" style="--d:.66s">가게의 주문 시스템부터 회사 홈페이지, 새 서비스의 웹과 앱까지. 필요한 것을 직접 만들고, 만든 뒤에도 함께 운영합니다.</p>
+          <div class="hero__actions">
+            <a class="pill pill--solid appear appear--btn" style="--d:.8s" href="#contact">상담 신청 <span class="pill__arrow" aria-hidden="true">→</span></a>
+            <a class="pill pill--ghost appear appear--side" style="--d:.92s" href="tel:01092845963">010-9284-5963</a>
+          </div>
         </div>
       </div>
 
-      <div class="hero__stage" role="group" aria-label="가게별 테이블 카드 예시">
-        <div class="tilt" id="tilt">
-          <div class="cardbox cardbox--hero"><div class="card" id="heroCard" data-shop="sea"></div></div>
-          <div class="tilt__shadow" aria-hidden="true"></div>
-        </div>
-        <div class="shops appear appear--soft" style="--d:1.2s">
-          <span class="shops__label">가게마다 다르게</span>
-          <button type="button" class="chip" data-shop="sea" aria-pressed="true">밤바다</button>
-          <button type="button" class="chip" data-shop="slow" aria-pressed="false">느린오후</button>
-          <button type="button" class="chip" data-shop="sobok" aria-pressed="false">소복</button>
-        </div>
-        <p class="sr-only" aria-live="polite" id="shopLive"></p>
-      </div>
-
-      <p class="hero__fine appear appear--fade" style="--d:1.3s">예시로 지어낸 가게예요 · 카드 속 QR은 찍히지 않아요</p>
+      <ol class="svc-list" id="services" aria-label="오더담이 하는 일">
+        <li class="svc appear appear--soft" style="--d:1s">
+          <div class="svc__vis svc__vis--order" aria-hidden="true">
+            <div class="cardbox"><div class="card card--quiet" data-shop="sea"></div></div>
+          </div>
+          <span class="svc__idx">01</span>
+          <h2>QR·NFC 테이블 주문</h2>
+          <p>가게마다 그린 테이블 카드 한 장으로 손님은 앱 없이 주문·결제하고, 사장님은 결제된 주문만 받아요.</p>
+          <a class="svc__link" href="#flow">작동 방식 보기 <span aria-hidden="true">↓</span></a>
+        </li>
+        <li class="svc appear appear--soft" style="--d:1.12s">
+          <div class="svc__vis svc__vis--web" aria-hidden="true">
+            <div class="browser">
+              <div class="browser__bar"><i></i><i></i><i></i><span></span></div>
+              <div class="browser__page">
+                <b></b><b></b><s></s>
+                <div class="browser__row"><u></u><u></u><u></u></div>
+              </div>
+            </div>
+          </div>
+          <span class="svc__idx">02</span>
+          <h2>웹사이트 제작</h2>
+          <p>가게와 회사의 홈페이지를 휴대폰에서 먼저 보기 좋게, 브랜드답게 만들어요. 이 사이트도 오더담이 만들었어요.</p>
+          <a class="svc__link" href="#contact">제작 상담하기 <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="svc appear appear--soft" style="--d:1.24s">
+          <div class="svc__vis svc__vis--app" aria-hidden="true">
+            <div class="mini-phone">
+              <div class="mini-phone__screen">
+                <p>SONO</p>
+                <span class="row"><i></i><b></b></span>
+                <span class="row"><i></i><b></b></span>
+                <span class="row"><i></i><b></b></span>
+              </div>
+            </div>
+            <div class="mini-phone mini-phone--back">
+              <div class="mini-phone__screen mini-phone__screen--paws">
+                <p>포우즈</p>
+                <span class="tile"></span><span class="tile"></span>
+              </div>
+            </div>
+          </div>
+          <span class="svc__idx">03</span>
+          <h2>웹·앱 개발</h2>
+          <p>아이디어를 웹 서비스와 앱으로 만들어요. SONO와 포우즈를 직접 만들어 운영하고 있어요.</p>
+          <a class="svc__link" href="#works">만든 것들 보기 <span aria-hidden="true">↓</span></a>
+        </li>
+      </ol>
     </section>
 
-    <!-- 하는 일 -->
-    <section class="services" id="services" aria-labelledby="services-title">
+    <!-- 대표 서비스 소개 -->
+    <section class="intro" aria-labelledby="intro-title">
       <div class="wrap">
-        <p class="label reveal">하는 일</p>
-        <h2 id="services-title" class="h2 reveal">주문 시스템부터 홈페이지, 앱까지<br><em>직접</em> 만들고 운영합니다.</h2>
-        <ol class="svc-list">
-          <li class="svc reveal">
-            <span class="svc__idx">01</span>
-            <h3>QR·NFC 테이블 주문</h3>
-            <p>가게마다 그린 테이블 카드 한 장으로 손님은 앱 없이 주문·결제하고, 사장님은 결제된 주문만 받아요.</p>
-            <a class="svc__link" href="#flow">작동 방식 보기 <span aria-hidden="true">↓</span></a>
-          </li>
-          <li class="svc reveal">
-            <span class="svc__idx">02</span>
-            <h3>웹사이트 제작</h3>
-            <p>가게와 회사의 홈페이지를 만들어요. 휴대폰에서 먼저 보기 좋게, 우리 브랜드답게 만듭니다. 지금 보시는 이 사이트도 오더담이 만들었어요.</p>
-            <a class="svc__link" href="#contact">제작 상담하기 <span aria-hidden="true">→</span></a>
-          </li>
-          <li class="svc reveal">
-            <span class="svc__idx">03</span>
-            <h3>웹·앱 개발</h3>
-            <p>아이디어를 웹 서비스와 앱으로 만들어요. 웹소설 설정 노트 SONO, 반려동물 동반 장소 찾기 포우즈를 직접 만들어 운영하고 있어요.</p>
-            <a class="svc__link" href="#works">만든 것들 보기 <span aria-hidden="true">↓</span></a>
-          </li>
-        </ol>
+        <p class="label reveal">대표 서비스 · QR·NFC 테이블 주문</p>
+        <h2 id="intro-title" class="h2 reveal">카드 한 장이면<br>주문도 결제도 <em>끝.</em></h2>
+        <p class="body body--muted reveal">손님은 QR을 찍거나 휴대폰을 대기만 하면 돼요. 앱 설치 없이 결제까지 끝나고, 사장님 화면에는 결제된 주문만 들어옵니다. 스크롤하면 한 번의 주문이 어떻게 흘러가는지 보여 드릴게요.</p>
       </div>
     </section>
 
