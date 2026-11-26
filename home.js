@@ -108,6 +108,7 @@
     const rad = th * Math.PI / 180;
     return { x: -aa * Math.sin(rad), y: aa * Math.cos(rad), r: th, s, o };
   }
+  const NO_HOVER = matchMedia('(hover: none)').matches;
   function gridPose(i) {
     const t = tiles[i];
     const [row, col] = (mobile ? CELLS_M : CELLS_D)[i];
@@ -119,7 +120,7 @@
     const h = t.h * gs;
     const x = -vw / 2 + rem + col * (colW + rem) + colW / 2;
     const y = -vh / 2 + top + row * (rowH + gridGap) + h / 2;
-    return { x, y, r: 0, s: gs, o: .26 };
+    return { x, y, r: 0, s: gs, o: NO_HOVER ? 1 : .26 };   // 마우스를 올릴 수 없는 기기에서는 처음부터 또렷하게
   }
   function hiddenPose(i) {   // 소개·SONO 화면으로 갈 때 타일은 심벌 쪽으로 모여 사라진다
     const c = tiles[i].cur;

@@ -227,7 +227,14 @@ body[data-page="about"] #stage, body[data-page="sono"] #stage { pointer-events: 
   #me-v .me-row > .nm { display: block; }
   #me-v .me-row > span:nth-child(2), #me-v .me-row > span:nth-child(3) { display: none; }
   #me-v .me-row > span:nth-child(4) { width: auto; }
-  #me-v, #modes, #cp { background: rgb(233 231 227 / .94); box-shadow: 0 0 0 .4rem rgb(233 231 227 / .94); }
+  /* 위쪽 띠: 어느 화면에서든 로고·메뉴가 아래로 지나가는 사진이나 글과 겹치지 않게 한다 */
+  body::before { content: ""; position: fixed; left: 0; right: 0; top: 0; height: 4.8rem; z-index: 45; background: var(--concrete); border-bottom: 1px solid rgb(0 0 0 / .1); pointer-events: none; }
+  /* 아래쪽 띠: 줄 보기에서 정보 줄과 보기 버튼이 타일 사진과 겹치지 않게 한다 */
+  body[data-page="work"]:not([data-view="g"])::after { content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 7.4rem; z-index: 15; background: var(--concrete); border-top: 1px solid rgb(0 0 0 / .1); pointer-events: none; }
+  body[data-page="about"] #cp { display: none; }
+  #about .ab-info dt { width: 9.5rem; }
+  /* 그리드 보기: 띠가 없으니 글자 뒤에만 배경을 깐다 */
+  body[data-view="g"] #modes, body[data-view="g"] #cp { background: rgb(233 231 227 / .94); box-shadow: 0 0 0 .4rem rgb(233 231 227 / .94); }
   #me-g { top: auto; bottom: 4.2rem; transform: none; }
   #me-g > div:nth-child(2), #me-g > div:nth-child(3) { display: none; }
   #me-g > div:nth-child(1) { width: auto; flex: 1; }
