@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>오더담 테이블 오더 · 카드 한 장으로 주문과 결제</title>
   <meta name="description" content="오더담 테이블 오더: 가게마다 1:1로 디자인한 QR·NFC 테이블 카드 한 장으로 손님은 앱 설치 없이 주문·결제하고, 사장님은 결제된 주문만 받습니다. 지금은 시범 매장을 찾고 있으며 실제 결제는 아직 받지 않습니다.">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#d7d4ce">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +27,9 @@
 
   <div id="sym" aria-hidden="true">
     <svg viewBox="0 0 100 100">
-      <path class="l" d="M0 0H27V5.5H5.5V94.5H27V100H0Z"/>
-      <path class="r" d="M100 0H73V5.5H94.5V94.5H73V100H100Z"/>
+      <defs><clipPath id="gl"><rect x="-60" y="-80" width="110.3" height="200"/></clipPath><clipPath id="gr"><rect x="49.7" y="-80" width="110" height="200"/></clipPath></defs>
+      <g class="l"><g clip-path="url(#gl)"><image href="assets/gate.png" x="-19.7" y="-47.5" width="135.5" height="142.5" preserveAspectRatio="none"/></g></g>
+      <g class="r"><g clip-path="url(#gr)"><image href="assets/gate.png" x="-19.7" y="-47.5" width="135.5" height="142.5" preserveAspectRatio="none"/></g></g>
       <circle class="dot" cx="50" cy="50" r="3.2"/>
     </svg>
   </div>

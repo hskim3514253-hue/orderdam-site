@@ -63,7 +63,7 @@
     vw = innerWidth; vh = innerHeight; mobile = vw < 768;
     TW = mobile ? 22 * rem : 18.4 * rem;
     GAP = .5 * rem;
-    symW = (mobile ? 13 : 13.4) * rem;
+    symW = (mobile ? 15 : 16) * rem;
     D = TW * (mobile ? 1.03 : 1.076) / 2 + (mobile ? 1.2 : 8.1) * rem;   // 세로 보기에서 심벌 두 조각이 벌어지는 거리
     let acc = 0;
     tiles.forEach((t, i) => {
@@ -97,7 +97,7 @@
     const near = clamp(1 - Math.abs(a) / (t.h * .9));
     const s = 1 + (mobile ? .03 : .076) * near;
     // 가로로 누운 만큼, 가운데 타일 양옆을 벌려 심벌 두 조각이 들어갈 자리를 만든다
-    const need = D + symW * .27 + 2.6 * rem - (act.h * (1 + (mobile ? .03 : .076))) / 2 - GAP;
+    const need = TW * (mobile ? 1.03 : 1.076) / 2 + (mobile ? .6 : 1.2) * rem + symW * .22 + 2 * rem - (act.h * (1 + (mobile ? .03 : .076))) / 2 - GAP;
     const E = Math.max(0, need) * clamp(-th / 90);
     const push = E * clamp(Math.abs(a) / (act.h / 2 + GAP)) * Math.sign(a);
     let aa = a + push;
@@ -164,13 +164,21 @@
   }
 
   // ── 심벌: 줄 보기에서는 벌어지고, 그리드에서는 닫힌다 (그리드에서 마우스를 올리면 다시 벌어진다)
-  let lastSpread = null;
+  let lastSpread = null, symZ = 0;
   function updateSpread() {
     let sp = 0;
-    const open = Math.max(0, D - symW * .23);
+    const open = Math.max(0, TW * (mobile ? 1.03 : 1.076) / 2 + (mobile ? .6 : 1.2) * rem - symW * .25);
     if (page === 'work' && ready) sp = view === 'g' ? (hovered >= 0 ? open : 0) : open;
     // 심벌은 SVG라 이동 거리를 그림 단위(가로 100)로 바꿔 준다
-    if (sp !== lastSpread) { $('#sym').style.setProperty('--spread', `${(sp / (symW / 100)).toFixed(3)}px`); lastSpread = sp; }
+    if (sp !== lastSpread) {
+      const sym = $('#sym');
+      sym.style.setProperty('--spread', `${(sp / (symW / 100)).toFixed(3)}px`);
+      // 문이 열려 있으면 타일 뒤로 보내 아치와 상판이 카드를 가리지 않게 한다. 닫힐 때는 다 닫힌 뒤 앞으로 나온다
+      clearTimeout(symZ);
+      if (sp > 0) sym.classList.add('is-back');
+      else symZ = setTimeout(() => sym.classList.remove('is-back'), 1000);
+      lastSpread = sp;
+    }
   }
 
   // ── 목록과 정보 줄
@@ -582,7 +590,7 @@
     at(2500, () => sym.classList.add('has-dot'));
     at(3100, () => count.classList.add('is-off'));
     const arts = ['nfc-cafe', 'sono-graph', 'paws-m', 'phone-menu'];
-    const ws = symW * .68, hs = symW * .56;
+    const ws = symW * .46, hs = symW * .36;
     at(3200, () => { sym.classList.remove('has-dot'); showWin(arts[0], ws, hs); });
     [1, 2, 3].forEach((k) => at(3200 + k * 620, () => { winIn.innerHTML = `<div class="tile-art" style="container-type:size">${ODArt.art(arts[k])}</div>`; ODArt.paint(winIn); }));
     at(5600, () => { winIn.innerHTML = `<div class="tile-art" style="container-type:size">${ODArt.art(tiles[active].art)}</div>`; ODArt.paint(winIn); });

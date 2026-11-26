@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+<defs>
+<radialGradient id="hole"><stop offset="0" stop-color="#3e3b36" stop-opacity=".55"/><stop offset=".7" stop-color="#5a5650" stop-opacity=".42"/><stop offset="1" stop-color="#6a665f" stop-opacity=".25"/></radialGradient>
+<radialGradient id="rim"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset=".8" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect x="0" y="0" width="1200" height="1.2" fill="#2e2b27" fill-opacity=".13"/>
+<rect x="0" y="1.2" width="1200" height="1" fill="#fff" fill-opacity=".18"/>
+<rect x="0" y="0" width="1.2" height="600" fill="#2e2b27" fill-opacity=".12"/>
+<rect x="1.2" y="0" width="1" height="600" fill="#fff" fill-opacity=".16"/>
+<g transform="translate(200 150)"><circle r="11" fill="url(#rim)"/><circle r="6.5" fill="url(#hole)"/><circle cx="-1.4" cy="-1.6" r="2.2" fill="#000" fill-opacity=".18"/></g><g transform="translate(200 450)"><circle r="11" fill="url(#rim)"/><circle r="6.5" fill="url(#hole)"/><circle cx="-1.4" cy="-1.6" r="2.2" fill="#000" fill-opacity=".18"/></g><g transform="translate(600 150)"><circle r="11" fill="url(#rim)"/><circle r="6.5" fill="url(#hole)"/><circle cx="-1.4" cy="-1.6" r="2.2" fill="#000" fill-opacity=".18"/></g><g transform="translate(600 450)"><circle r="11" fill="url(#rim)"/><circle r="6.5" fill="url(#hole)"/><circle cx="-1.4" cy="-1.6" r="2.2" fill="#000" fill-opacity=".18"/></g><g transform="translate(1000 150)"><circle r="11" fill="url(#rim)"/><circle r="6.5" fill="url(#hole)"/><circle cx="-1.4" cy="-1.6" r="2.2" fill="#000" fill-opacity=".18"/></g><g transform="translate(1000 450)"><circle r="11" fill="url(#rim)"/><circle r="6.5" fill="url(#hole)"/><circle cx="-1.4" cy="-1.6" r="2.2" fill="#000" fill-opacity=".18"/></g>
+</svg>
